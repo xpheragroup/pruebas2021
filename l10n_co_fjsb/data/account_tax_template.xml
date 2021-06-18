@@ -1,0 +1,2308 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="l10n_co_fjsb_tax_0" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">IVA Compra 5%</field>
+        <field name="amount">5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24080502'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24081015'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_0_1" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">IVA Servicios del 5%</field>
+        <field name="amount">5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24080505'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24080505'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_0_2" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">A la tarifa del 8%</field>
+        <field name="amount">8</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24080503'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24080503'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_1" model="account.tax.template">
+        <field name="sequence">0</field>
+        <field name="name">IVA Compra 19%</field>
+        <field name="amount">19</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24080501'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24081015'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_1_1" model="account.tax.template">
+        <field name="sequence">0</field>
+        <field name="name">IVA Servicios del 19%</field>
+        <field name="amount">19</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24080504'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24080504'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_2" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">IVA Descontable Compra 16% (2016 y Enero 2017)</field>
+        <field name="amount">16</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_3" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Salarios y Pagos Laborales</field>
+        <field name="amount">0</field>
+        <field name="amount_type">fixed</field>
+        <field name="type_tax_use">none</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+             
+
+               'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_4" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">IVA Devoluciones Ventas 16% 2016</field>
+        <field name="amount">16</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_5" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">IVA Compra Importaciones</field>
+        <field name="amount">19</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_6" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">IVA Compra Excluido</field>
+        <field name="amount">0</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_7" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">IVA Compra Exento</field>
+        <field name="amount">0</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_8" model="account.tax.template">
+        <field name="sequence">0</field>
+        <field name="name">IVA Ventas 19%</field>
+        <field name="amount">19</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24081001'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24081001'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_8_1" model="account.tax.template">
+        <field name="sequence">0</field>
+        <field name="name">IVA Servicios 19%</field>
+        <field name="amount">19</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24081003'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24081003'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_8_2" model="account.tax.template">
+        <field name="sequence">0</field>
+        <field name="name">Sobre AIU (Base Gravable Especial)</field>
+        <field name="amount">19</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24081010'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24081010'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_9" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">IVA Ventas 5%</field>
+        <field name="amount">5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24081002'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24081002'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_9_1" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">IVA Servicios 5%</field>
+        <field name="amount">5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24081004'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_24081004'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_10" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">IVA Excento</field>
+        <field name="amount">0</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_11" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">IVA Excluido</field>
+        <field name="amount">0</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_12" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteIVA 15% sobre el 19% IVA</field>
+        <field name="amount">-2.85</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23670510'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23670510'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_13" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteIVA 15% sobre el 5% IVA</field>
+        <field name="amount">-0.75</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23670510'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23670510'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_14" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteIVA 15% sobre el 5% IVA Contrapartida</field>
+        <field name="amount">0.75</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23670505'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23670505'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_15" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteIVA 15% sobre el 19% IVA Contrapartida</field>
+        <field name="amount">2.85</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23670505'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23670505'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_16" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Compra Combustibles 0.1%</field>
+        <field name="amount">-0.1</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23654003'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23654003'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_17" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Compra Cafe 0.5%</field>
+        <field name="amount">-0.5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_18" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Comisiones Persona Natural 10%</field>
+        <field name="amount">-10</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_19" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Compras Declarantes 2.5%</field>
+        <field name="amount">-2.5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23654006'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23654006'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_20" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Consultorias, Servicios Tecnicos y Asistencia Tecnica Pagos al Exterior 10%</field>
+        <field name="amount">-10</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_21" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Adquisicion de Vehiculos 1%</field>
+        <field name="amount">-1</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_22" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Compras de Bienes Raices 1%</field>
+        <field name="amount">-1</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_23" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Servicios P Jurídicas y PN Declarantes 4%</field>
+        <field name="amount">-4</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652502'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652502'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_24" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Servicio Transporte Nacional Carga 1%</field>
+        <field name="amount">-1</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652503'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652503'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_25" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Servicios en General Personas Naturales No Declarantes Renta 6%</field>
+        <field name="amount">-6</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652501'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652501'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_26" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Servicio de Vigilancia y Aseo (Sobre AIU) 2%</field>
+        <field name="amount">-2</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652508'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652508'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_27" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Honorarios Servicios Licencias Software 3.5%</field>
+        <field name="amount">-3.5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652510'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652510'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_28" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Contratos de Obra Inmuebles 2%</field>
+        <field name="amount">-2</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652507'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652507'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_29" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Arrendamientos Bienes Muebles 4%</field>
+        <field name="amount">-4</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23653003'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23653003'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_30" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Arrendamientos Bienes Inmuebles 3.5%</field>
+        <field name="amount">-3.5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23653001'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23653001'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_30" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Arrendamientos Bienes Inmuebles 3.5%</field>
+        <field name="amount">-3.5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23653001'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23653001'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_31" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Rendimientos Financieros Generales 7%</field>
+        <field name="amount">-7</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_32" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Honorarios Persona Natural 10%</field>
+        <field name="amount">-10</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23651501'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23651501'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_33" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Honorarios Diseno Web y Consultoria Informatica 3.5%</field>
+        <field name="amount">-3.5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652510'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652510'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_34" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Adquisicion de Bienes Raices Comerciales 2.5%</field>
+        <field name="amount">-2.5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23656001'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23656001'),
+            }),
+        ]"/>
+    </record>
+
+
+    <record id="l10n_co_fjsb_tax_34_1" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Arendamiento de Bienes Raices 2.5%</field>
+        <field name="amount">-2.5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field> 
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23653002'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23653002'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_35" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Compras No Declarantes 3.5%</field>
+        <field name="amount">-3.5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23654001'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23654001'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_36" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Comisiones Persona Juridica 11%</field>
+        <field name="amount">-11</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_37" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Compras Bienes Agricolas 1.5%</field>
+        <field name="amount">-1.5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23654002'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23654002'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_37_1" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Compras Bienes Agricolas 3.5%</field>
+        <field name="amount">-3.5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23654005'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23654005'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_38" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Servicio Transporte Terrestre Nacional Pasajeros 3.5%</field>
+        <field name="amount">-3.5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652504'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652504'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_39" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Servicio Temporales de Empleo (Sobre AIU) 1%</field>
+        <field name="amount">-1</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652511'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652511'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_40" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Honorarios Persona Juridica 11%</field>
+        <field name="amount">-11</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23651502'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23651502'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_41" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Servicio Integrales de Salud 2%</field>
+        <field name="amount">-2</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652509'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652509'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_42" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Servicio de Hoteles 3.5%</field>
+        <field name="amount">-3.5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652505'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652505'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_42_1" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte Servicio de Restaurantes 3.5%</field>
+        <field name="amount">-3.5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652506'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23652506'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_43" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteICA</field>
+        <field name="amount">0</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_44" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteICA 6.9</field>
+        <field name="amount">-0.69</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23680505'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23680505'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_44_1" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteICA 0.7</field>
+        <field name="amount">-0.07</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23680503'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23680503'),
+            }),
+        ]"/>
+    </record>
+
+
+
+    <record id="l10n_co_fjsb_tax_44_2" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteICA 4.5</field>
+        <field name="amount">-0.45</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23680504'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23680504'),
+            }),
+        ]"/>
+    </record>
+
+
+
+    <record id="l10n_co_fjsb_tax_44_3" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteICA 13.8</field>
+        <field name="amount">-1.38</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23680508'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23680508'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_45" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteICA 11.04</field>
+        <field name="amount">-1.104</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23680506'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23680506'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_46" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteICA 4.14</field>
+        <field name="amount">-0.414</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23680502'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23680502'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_47" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteICA 1.38</field>
+        <field name="amount">-0.138</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23680501'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23680501'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_48" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteICA 9.66</field>
+        <field name="amount">-0.966</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23680507'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_23680507'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_49" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">IVA Compra 19% RC</field>
+        <field name="amount">19</field>
+        <field name="amount_type">group</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_50" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">IVA Compra 19% RS</field>
+        <field name="amount">19</field>
+        <field name="amount_type">group</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_51" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">IVA Compra 5% RS</field>
+        <field name="amount">5</field>
+        <field name="amount_type">group</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_52" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">IVA Compra 5% RC</field>
+        <field name="amount">5</field>
+        <field name="amount_type">group</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_53" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte 2.50% Ventas</field>
+        <field name="amount">-2.5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_13551502'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_13551502'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_54" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteFte 3.50% Ventas</field>
+        <field name="amount">-3.5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_13551501'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_13551501'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_55" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteIVA 15% sobre el 5% IVA Ventas</field>
+        <field name="amount">-0.75</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_13551705'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_13551705'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_56" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteIVA 15% sobre el 19% IVA Ventas</field>
+        <field name="amount">-2.85</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_13551705'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_13551705'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_57" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteICA 4.14 Ventas</field>
+        <field name="amount">-0.414</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_13551805'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_13551805'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_58" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">RteICA 9.66 Ventas</field>
+        <field name="amount">-0.966</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_13551805'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('co_puc_13551805'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="l10n_co_fjsb_tax_covered_goods" model="account.tax.template">
+        <field name="sequence">1</field>
+        <field name="name">Bienes Cubiertos</field>
+        <field name="amount">0</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="active">False</field>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        <field name="tax_group_id" ref="tax_group_covered_goods"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+            }),
+        ]"/>
+    </record>
+</odoo>

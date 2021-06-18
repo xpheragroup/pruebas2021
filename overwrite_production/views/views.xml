@@ -1,0 +1,284 @@
+<odoo>
+  <data>
+    <record id="mrp.mrp_production_form_view" model="ir.ui.view">
+            <field name="name">mrp.production.form</field>
+            <field name="model">mrp.production</field>
+            <field name="arch" type="xml">
+                <form string="Manufacturing Orders">
+                <header>
+                    <field name="confirm_cancel" invisible="1"/>
+                    <button name="button_mark_done" attrs="{'invisible': [('state', '!=', 'to_close')]}" string="Mark as Done" type="object" class="oe_highlight"/>
+                    <button name="to_review" attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('is_locked', '=', False)]}" string="A revisión" type="object" class="oe_highlight"/>
+                    <button name="to_approv" attrs="{'invisible': ['|', ('state', '!=', 'review'), ('is_locked', '=', False)]}" string="A aprobación" type="object" class="oe_highlight"/>
+                    <button name="action_confirm" attrs="{'invisible': ['|', ('state', '!=', 'approv'), ('is_locked', '=', False)]}" string="Mark as Todo" type="object" class="oe_highlight"/>
+                    <button name="action_assign" attrs="{'invisible': ['|', '|', ('is_locked', '=', False), ('state', 'in', ('draft', 'review', 'approv', 'done', 'cancel')), ('reservation_state', '=', 'assigned')]}" string="Check availability" type="object" class="oe_highlight"/>
+                    <button name="to_draft" attrs="{'invisible': ['|', ('state', 'not in', ['review', 'approv']), ('is_locked', '=', False)]}" string="A borrador" type="object"/>
+                    <button name="button_plan" attrs="{'invisible': ['|', ('state', '!=', 'confirmed'), ('routing_id', '=', False)]}" type="object" string="Plan" class="oe_highlight"/>
+                    <button name="button_unplan" type="object" string="Unplan" attrs="{'invisible': ['|', '|', ('state', '!=', 'planned'), ('date_planned_start', '=', False), ('date_planned_finished', '=', False)]}"/>
+                    <button name="open_produce_product" attrs="{'invisible': ['|', '|', '|', ('state', '=', 'to_close'), ('is_locked', '=', False), ('reservation_state', '!=', 'assigned'), ('routing_id', '!=', False)]}" string="Produce" type="object" class="oe_highlight"/>
+                    <button name="open_produce_product" attrs="{'invisible': ['|', '|', '|', ('state', '=', 'to_close'), ('is_locked', '=', False), ('reservation_state', 'not in', ('confirmed', 'waiting')), ('routing_id', '!=', False)]}" string="Produce" type="object"/>
+                    <button name="post_inventory" string="Post Inventory" type="object" attrs="{'invisible': [('post_visible', '=', False)]}" groups="base.group_no_one"/>
+                    <button name="button_scrap" type="object" string="Scrap" attrs="{'invisible': ['|', ('state', 'in', ('cancel', 'draft', 'review', 'approv')), ('is_locked', '=', False)]}"/>
+                    <button name="button_unreserve" type="object" string="Unreserve" attrs="{'invisible': [('unreserve_visible', '=', False)]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,review,approv,confirmed,assigned,done"/>
+                    <button name="action_toggle_is_locked" attrs="{'invisible': ['|', '|', ('state', 'in', ('cancel', 'draft', 'review', 'approv')), ('id', '=', False), ('is_locked', '=', False)]}" string="Unlock" groups="mrp.group_mrp_manager" type="object" help="Unlock the manufacturing order to correct what has been consumed or produced."/>
+                    <button name="action_toggle_is_locked" attrs="{'invisible': [('is_locked', '=', True)]}" string="Lock" class="oe_highlight" groups="mrp.group_mrp_manager" type="object"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            attrs="{'invisible': ['|', '|', '|', ('id', '=', False), ('is_locked', '=', False), ('state', 'in', ('done','cancel')), ('confirm_cancel', '=', True)]}"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            attrs="{'invisible': ['|', '|', '|', ('id', '=', False), ('is_locked', '=', False), ('state', 'in', ('done','cancel')), ('confirm_cancel', '=', False)]}"
+                            confirm="Some product moves have already been confirmed, this manufacturing order can't be completely cancelled. Are you still sure you want to process ?"/>
+                    <button name="action_print_bom" string="Materiales" type="object"/>
+                </header>
+                <sheet>
+                    <field name="reservation_state" invisible="1"/>
+                    <field name="is_locked" invisible="1"/>
+                    <field name="post_visible" invisible="1"/>
+                    <field name="unreserve_visible" invisible="1"/>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(stock.action_stock_report)d" icon="fa-arrow-up" class="oe_stat_button" string="Traceability" type="action" states="done" groups="stock.group_production_lot"/>
+                        <button name="%(mrp.action_mrp_workorder_production_specific)d" type="action" attrs="{'invisible': [('workorder_count', '=', 0)]}" class="oe_stat_button" icon="fa-play-circle-o">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"><field name="workorder_done_count" widget="statinfo" nolabel="1"/> / <field name="workorder_count" widget="statinfo" nolabel="1"/></span>
+                                <span class="o_stat_text">Work Orders</span>
+                            </div>
+                        </button>
+                        <button name="%(mrp.action_mrp_production_moves)d" type="action" string="Product Moves" class="oe_stat_button" icon="fa-exchange" attrs="{'invisible': [('state', 'not in', ('progress', 'done'))]}"/>
+                        <button type="object" name="action_view_mo_delivery" class="oe_stat_button" icon="fa-truck"  groups="base.group_user" attrs="{'invisible': [('delivery_count', '=', 0)]}">
+                            <field name="delivery_count" widget="statinfo" string="Transfers"/>
+                        </button>
+                        <button class="oe_stat_button" name="action_see_move_scrap" type="object" icon="fa-arrows-v" attrs="{'invisible': [('scrap_count', '=', 0)]}">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"><field name="scrap_count"/></span>
+                                <span class="o_stat_text">Scraps</span>
+                            </div>
+                        </button>
+                        <field name="workorder_ids" invisible="1"/>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Manufacturing Reference" nolabel="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="id" invisible="1"/>
+                            <field name="product_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="product_tmpl_id" invisible="1"/>
+                            <label for="product_qty"/>
+                            <div class="o_row no-gutters d-flex">
+                                <div class="col">
+                                    <field name="product_qty" class="mr-1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="product_uom_id" options="{'no_open':True,'no_create':True}" force_save="1" groups="uom.group_uom" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <button type="action"
+                                        name="%(mrp.action_change_production_qty)d"
+                                        context="{'default_mo_id': id}"
+                                        string="Update" class="oe_link" attrs="{'invisible': ['|', ('state', 'in', ('draft', 'done','cancel')), ('id', '=', False)]}"/>
+                                </div>
+                            </div>
+                            <field name="bom_id"
+                                context="{'default_product_tmpl_id': product_tmpl_id}" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="routing_id" groups="mrp.group_mrp_routings"/>
+                        </group>
+                        <group>
+                            <field name="date_deadline" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                            <field name="date_start_wo"
+                                attrs="{'invisible': [
+                                '|',
+                                    '&amp;',
+                                        ('routing_id', '!=', False),
+                                        ('state', 'not in', ['draft', 'confirmed']),
+                                    ('routing_id', '=', False),
+                                ], 'readonly': [
+                                    ('routing_id', '!=', False),
+                                    ('state', 'not in', ['draft', 'confirmed']),
+                                ]}"/>
+                            <div class="o_row o_td_label">
+                                <label for="date_planned_start" string="Planned Date"
+                                       attrs="{'invisible': [
+                                                ('routing_id', '!=', False),
+                                                ('state', 'in', ['draft', 'confirmed'])
+                                        ]}"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="date_planned_start"
+                                       attrs="{'invisible': [
+                                            ('routing_id', '!=', False),
+                                            ('state', 'in', ['draft', 'confirmed']),
+                                        ], 'readonly': [
+                                       '|',
+                                        '&amp;',
+                                            ('routing_id', '=', False),
+                                            ('state', 'in', ['done', 'cancel']),
+                                        '&amp;',
+                                            ('routing_id', '!=', False),
+                                            ('state', 'not in', ['draft', 'confirmed'])]}"/>
+                                <label for="date_planned_finished" string="to" attrs="{'invisible': [
+                                    '|',
+                                        ('id', '=', False),
+                                        '&amp;',
+                                            ('routing_id', '!=', False),
+                                            ('state', 'in', ['draft', 'confirmed'])
+                                ]}"/>
+                                <field name="date_planned_finished" required="1"
+                                attrs="{'readonly': [
+                                    '|',
+                                        '&amp;',
+                                            ('routing_id', '=', False),
+                                            ('state', 'in', ['done', 'cancel']),
+                                        ('routing_id', '!=', False)
+                                ], 'invisible': [
+                                    ('routing_id', '!=', False),
+                                    ('state', 'in', ['draft', 'confirmed'])
+                                ]}"/>
+                            </div>
+                            <field name="user_id"/>
+                            <field name="origin"/>
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}" force_save="1"/>
+                            <field name="show_final_lots" invisible="1"/>
+                            <field name="production_location_id" invisible="1" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Components">
+                            <field name="move_raw_ids" context="{'final_lots': show_final_lots, 'tree_view_ref': 'mrp.view_stock_move_raw_tree', 'form_view_ref': 'mrp.view_stock_move_lots', 'default_location_id': location_src_id, 'default_location_dest_id': production_location_id, 'default_state': 'draft', 'default_raw_material_production_id': id, 'default_picking_type_id': picking_type_id}" attrs="{'readonly': ['&amp;', ('state', '!=', 'draft'), ('is_locked', '=', 'True')]}"/>
+                        </page>
+                        <page string="Finished Products">
+                            <field name="finished_move_line_ids" context="{'form_view_ref': 'mrp.view_finisehd_move_line'}" attrs="{'readonly': [('is_locked', '=', True)], 'invisible': [('finished_move_line_ids', '=', [])]}">
+                                 <tree default_order="done_move" editable="bottom" create="0" delete="0" decoration-muted="state in ('done', 'cancel')">
+                                    <field name="product_id" readonly="1"/>
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="lot_id" groups="stock.group_production_lot" context="{'default_product_id': product_id, 'default_company_id': company_id}" attrs="{'invisible': [('lots_visible', '=', False)]}"/>
+                                    <field name="product_uom_id" groups="uom.group_uom"/>
+                                    <field name="qty_done" string="Produced"/>
+                                    <field name="lots_visible" invisible="1"/>
+                                    <field name="done_move" invisible="1"/>
+                                    <field name="state" invisible="1"/>
+                                </tree>
+                            </field>
+                            <p attrs="{'invisible': [('finished_move_line_ids', '!=', [])]}">
+                                Use the Produce button or process the work orders to create some finished products.
+                            </p>
+                        </page>
+                        <page string="Miscellaneous" groups="stock.group_stock_multi_locations">
+                            <group>
+                                <group>
+                                    <field name="picking_type_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="location_src_id" options="{'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="location_dest_id" options="{'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="user_rev" option="{'no_create': True}"/>
+                                    <field name="date_rev" option="{'no_create': True}"/>
+                                    <field name="user_apr" option="{'no_create': True}"/>
+                                    <field name="date_apr" option="{'no_create': True}"/>
+                                    <field name="user_con" option="{'no_create': True}"/>
+                                    <field name="date_con" option="{'no_create': True}"/>
+                                    <field name="user_ter" option="{'no_create': True}"/>
+                                    <field name="date_ter" option="{'no_create': True}"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+        <record id="mrp.mrp_bom_form_view" model="ir.ui.view">
+        <field name="name">mrp.bom.form</field>
+        <field name="model">mrp.bom</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <form string="Bill of Material">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="584" type="action" class="oe_stat_button" icon="fa-bars" string="Structure &amp; Cost"/>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                <group>
+                    <group>
+                        <field name="active" invisible="1"/>
+                        <field name="product_tmpl_id" context="{'default_type': 'product'}"/>
+                        <field name="product_uom_category_id" invisible="1"/>
+                        <field name="product_id" groups="product.group_product_variant" context="{'default_type': 'product'}"/>
+                        <label for="product_qty" string="Quantity"/>
+                        <div class="o_row">
+                            <field name="product_qty"/>
+                            <field name="product_uom_id" options="{'no_open':True,'no_create':True}" groups="uom.group_uom"/>
+                        </div>
+                        <field name="routing_id" attrs="{'invisible': [('type','not in',('normal','phantom'))]}" groups="mrp.group_mrp_routings" context="{'default_company_id': company_id}"/>
+                    </group>
+                    <group>
+                        <field name="code"/>
+                        <field name="type" widget="radio"/>
+                        <p colspan="2" class="oe_grey oe_edit_only" attrs="{'invisible': [('type','!=','phantom')]}">
+                        <ul>
+                            A BoM of type kit is used to split the product into its components.
+                            <li>
+                                At the creation of a Manufacturing Order.
+                            </li>
+                            <li>
+                                At the creation of a Stock Transfer.
+                            </li>
+                        </ul>
+                        </p>
+                        <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Components">
+                        <field name="bom_line_ids" widget="one2many" context="{'default_parent_product_tmpl_id': product_tmpl_id, 'default_product_id': False, 'default_company_id': company_id, 'default_routing_id': routing_id}">
+                            <tree string="Components" editable="bottom">
+                                <field name="company_id" invisible="1"/>
+                                <field name="routing_id" invisible="1"/>
+                                <field name="sequence" widget="handle"/>
+                                <field name="product_id" context="{'default_type': 'product'}"/>
+                                <field name="product_tmpl_id" invisible="1"/>
+                                <button name="action_see_attachments" type="object" icon="fa-files-o" aria-label="Product Attachments" title="Product Attachments" class="float-right oe_read_only"/>
+                                <field name="attachments_count" class="text-left oe_read_only" string=" "/>
+                                <field name="product_qty_display"/>
+                                <field name="product_uom_category_id" invisible="1"/>
+                                <field name="parent_product_tmpl_id" invisible="1"/>
+                                <field name="possible_bom_product_template_attribute_value_ids" invisible="1"/>
+                                <field name="product_uom_id_display" options="{'no_open':True,'no_create':True}" groups="uom.group_uom"/>
+                                <field name="bom_product_template_attribute_value_ids" widget="many2many_tags" options="{'no_create': True}" attrs="{'column_invisible': [('parent.product_id', '!=', False)]}" groups="product.group_product_variant"/>
+                                <field name="operation_id" groups="mrp.group_mrp_routings" attrs="{'column_invisible': [('parent.type','not in', ('normal', 'phantom'))]}" options="{'no_quick_create':True,'no_create_edit':True}"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="By-products" attrs="{'invisible': [('type','!=','normal')]}" groups="mrp.group_mrp_byproducts">
+                        <field name="byproduct_ids" context="{'form_view_ref' : 'mrp.mrp_bom_byproduct_form_view', 'default_company_id': company_id, 'default_routing_id': routing_id}">
+                            <tree string="By-products" editable="top">
+                                <field name="company_id" invisible="1"/>
+                                <field name="routing_id" invisible="1"/>
+                                <field name="product_id" context="{'default_type': 'product'}"/>
+                                <field name="product_qty"/>
+                                <field name="product_uom_id" groups="uom.group_uom"/>
+                                <field name="operation_id" groups="mrp.group_mrp_routings" options="{'no_quick_create':True,'no_create_edit':True}"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Miscellaneous">
+                        <group>
+                            <group>
+                                <field name="ready_to_produce" attrs="{'invisible': [('type','!=','normal')]}" string="Manufacturing Readiness" groups="mrp.group_mrp_routings"/>
+                                <field name="consumption" attrs="{'invisible': [('type','!=','normal')], 'required': [('type','=','normal')]}"/>
+                            </group>
+                            <group>
+                                <field name="picking_type_id" attrs="{'invisible': [('type','!=','normal')]}" string="Operation" groups="stock.group_adv_location"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" colspan="4" widget="mail_thread" nolabel="1"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+  </data>
+</odoo>

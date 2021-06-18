@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>       
+        <report 
+            string="Remisión" 
+            id="report_remision" 
+            model="stock.picking" 
+            report_type="qweb-pdf"
+            name="overwrite_inventory.report_remision_inventory" 
+            file="overwrite_inventory.report_remision_inventory" 
+            print_report_name="'Remisión - %s' % (object.name)"
+        />
+
+        <template id="report_remision_inventory">
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page">
+                            <div class="oe_structure"/>
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2>
+                                        <span t-field="o.company_id"/>
+                                        <br/>
+                                        <br/>
+                                        <span t-field="o.name"/>
+                                    </h2>
+                                </div>
+                                <div class="col-5"/></div>
+                                <div class="row mt32 mb32">
+                                    <div class="col-3">
+                                        <strong>Fecha de Creación:</strong>
+                                        <br/>
+                                        <span t-field="o.date"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <strong>Fecha de Emisión:</strong>
+                                        <br/>
+                                        <span t-field="o.date_done"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <strong>Periodo de Despacho:</strong>
+                                        <br/>
+                                        <span t-field="o.x_studio_periodo_de_despacho"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <strong>Estado Remisión:</strong>
+                                        <br/>
+                                        <span t-field="o.x_studio_estado_remisin"/>
+                                    </div>
+                                </div>
+                                <div class="row mt32 mb32">
+                                    <div class="col-3">
+                                        <strong>Almacén de Despacho:</strong>
+                                        <br/>
+                                        <span t-field="o.location_id"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <strong>Dirección de Despacho:</strong>
+                                        <br/>
+                                        <span t-field="o.location_id.company_id.street"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <strong>Ciudad de Despacho:</strong>
+                                        <br/>
+                                        <span t-field="o.location_id.company_id.city"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <strong>Centro de Costo:</strong>
+                                        <br/>
+                                        <span t-field="o.x_studio_centro_de_costos"/>
+                                    </div>
+                                </div>
+                                <div class="row mt32 mb32">
+                                    <div class="col-3">
+                                        <strong>Nombre de Cliente:</strong>
+                                        <br/>
+                                        <span t-field="o.partner_id"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <strong>Dirección de Recibo:</strong>
+                                        <br/>
+                                        <span t-field="o.partner_id.street"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <strong>Ciudad de Recibo:</strong>
+                                        <br/>
+                                        <span t-field="o.partner_id.city"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <strong>Celular:</strong>
+                                        <br/>
+                                        <span t-field="o.partner_id.mobile"/>
+                                    </div>
+                                </div>
+                                <br/>
+                                <table class="table table-bordered table-sm" t-if="o.move_ids_without_package">
+                                    <thead>
+                                        <tr>
+                                            <th>Rg</th>
+                                            <th>Código</th>
+                                            <th>Producto</th>
+                                            <th>Terminado</th>
+                                            <th>Unidad de medida</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-if="o.move_ids_without_package">
+                                            <t t-set="rg_counter" t-value="1"/>
+                                            <tr t-foreach="o.move_ids_without_package" t-as="raw_line">
+                                                <td>
+                                                    <span t-esc="rg_counter"/> 
+                                                </td>
+                                                <td>
+                                                    <span t-field="raw_line.product_id.id"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="raw_line.product_id"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="raw_line.quantity_done"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="raw_line.product_uom"/>
+                                                </td>
+                                                <t t-set="rg_counter" t-value="rg_counter+1"/>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                                <br/>
+                                <table class="table table-bordered table-sm">
+                                    <thead>
+                                        <tr><th colspan="6"><center><b>Control de Despacho</b></center></th></tr>
+                                        <tr style="text-align: center;">
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="text-align: right;">
+                                        <tr>
+                                            <td>
+                                                <span>Cajas Grandes</span> 
+                                            </td>
+                                            <td>
+                                                <span></span> 
+                                            </td>
+                                            <td>
+                                                <span>Cajas Medianas</span> 
+                                            </td>
+                                            <td>
+                                                <span></span> 
+                                            </td>
+                                            <td>
+                                                <span>Cajas Pequeñas</span> 
+                                            </td>
+                                            <td>
+                                                <span></span> 
+                                            </td>  
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>Cajas Reutilizables</span> 
+                                            </td>
+                                            <td>
+                                                <span></span> 
+                                            </td>
+                                            <td>
+                                                <span>Bolsas</span> 
+                                            </td>
+                                            <td>
+                                                <span></span> 
+                                            </td>
+                                            <td>
+                                                <span>Pacas</span> 
+                                            </td>
+                                            <td>
+                                                <span></span> 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>Palos, Ganchos, Mangos</span> 
+                                            </td>
+                                            <td>
+                                                <span></span> 
+                                            </td>
+                                            <td>
+                                                <span>Baldes, Canecas, Papelera</span> 
+                                            </td>
+                                            <td>
+                                                <span></span> 
+                                            </td>
+                                            <td>
+                                                <span>Papel Higiénico</span> 
+                                            </td>
+                                            <td>
+                                                <span></span> 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>Vinipelados</span> 
+                                            </td>
+                                            <td>
+                                                <span></span> 
+                                            </td>
+                                            <td colspan="3">
+                                                <span>Otros Tipo de Embalajes</span> 
+                                            </td>
+                                            <td>
+                                                <span></span> 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">
+                                                <span><b>GRAN TOTAL</b></span> 
+                                            </td>
+                                            <td>
+                                                <span></span> 
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row mt32 mb32">
+                                    <div class="col-3">
+                                        <strong>Quién Entrega:</strong>
+                                        <br/>
+                                        <span t-field="o.x_studio_quien_entrega"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <strong>Cargo Quien Entrega:</strong>
+                                        <br/>
+                                        <span t-field="o.x_studio_cargo_quien_entrega"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <strong>Fecha y Hora de Entrega:</strong>
+                                        <br/>
+                                        <span t-field="o.x_studio_fecha_y_hora_de_entrega"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <strong>Quién Transporta:</strong>
+                                        <br/>
+                                        <span t-field="o.x_studio_quien_transporta"/>
+                                    </div>
+                                </div>
+                                <div class="row mt32 mb32">
+                                    <div class="col-3">
+                                        <strong>Quién Recibe:</strong>
+                                        <br/>
+                                        <span t-field="o.x_studio_quien_recibe"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <strong>Cargo Quien Recibe:</strong>
+                                        <br/>
+                                        <span t-field="o.x_studio_cargo_quien_recibe"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <strong>Fecha y Hora Recibido:</strong>
+                                        <br/>
+                                        <span t-field="o.x_studio_fecha_y_hora_recibido"/>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

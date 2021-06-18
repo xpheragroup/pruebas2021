@@ -1,0 +1,45 @@
+<odoo>
+    <!--<data>-->
+
+          <record model="internal.requisitions" id="Requisition0">
+            <field name="name">Requisition 0</field>
+            <field name="description">Requisition 0's description
+            </field>
+          </record>
+
+          <record model="internal.requisitions" id="Requisition1">
+            <field name="name">Requisition 1</field>
+          </record>
+
+          <record model="internal.requisitions" id="Requisition2">
+            <field name="name">Requisition 2</field>
+            <field name="description">Requisition 2's description</field>
+          </record>
+<!--
+          <record id="object0" model="internal_requisitions.internal_requisitions">
+            <field name="name">Object 0</field>
+            <field name="value">0</field>
+          </record>
+
+          <record id="object1" model="internal_requisitions.internal_requisitions">
+            <field name="name">Object 1</field>
+            <field name="value">10</field>
+          </record>
+
+          <record id="object2" model="internal_requisitions.internal_requisitions">
+            <field name="name">Object 2</field>
+            <field name="value">20</field>
+          </record>
+
+          <record id="object3" model="internal_requisitions.internal_requisitions">
+            <field name="name">Object 3</field>
+            <field name="value">30</field>
+          </record>
+
+          <record id="object4" model="internal_requisitions.internal_requisitions">
+            <field name="name">Object 4</field>
+            <field name="value">40</field>
+          </record>
+-->
+    <!--</data>-->
+</odoo>

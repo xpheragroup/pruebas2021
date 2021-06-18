@@ -1,0 +1,36 @@
+<odoo>
+    <data>
+        <record id="mrp_bom_form_view" model="ir.ui.view">
+            <field name="name">mrp.bom_approve.form</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe.stat_button" type="object" name="approve_list" string="Aprobar" title="Aprobar"/>
+                </div>
+            </field>
+        </record>
+
+        <record id="mrp_production_inherit_form" model="ir.ui.view">
+            <field name="name">mrp.production.inherit.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <group>
+                    <group>
+                        <field name="total_std_cost" invisible="True"/>
+                        <field name="total_std_cost_blocked" invisible="False"/>
+                        <field name="total_real_cost" invisible="True"/>
+                        <field name="total_real_cost_blocked" invisible="False"/>
+                    </group>
+                    <group>
+                        <field name="total_std_cost_prom" invisible="True"/>
+                        <field name="total_std_cost_prom_blocked" invisible="False"/>
+                        <field name="total_real_cost_prom" invisible="True"/>
+                        <field name="total_real_cost_prom_blocked" invisible="False"/>
+                    </group>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>

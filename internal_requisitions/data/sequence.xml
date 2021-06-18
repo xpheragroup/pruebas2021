@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Sequences for purchase.order -->
+        <record id="seq_internal_requisition" model="ir.sequence">
+            <field name="name">Internal Requisition Orden</field>
+            <field name="code">internal.requisition</field>
+            <field name="prefix">RINT</field>
+            <field name="padding">9</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

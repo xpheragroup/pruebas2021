@@ -1,0 +1,68 @@
+<odoo>
+    <data>
+        <report
+            id="menu_xlsx"
+            model="overwrite_mrp.bom_register"
+            string="Imprimir Menús a XLSX"
+            report_type="xlsx"
+            name="overwrite_mrp.menu_xlsx"
+            file="overwrite_mrp.menu_xlsx"
+            attachment_use="False"
+        />
+        <report
+            id="productos_menu_xlsx"
+            model="overwrite_mrp.bom_register"
+            string="Imprimir Productos Menús a XLSX"
+            report_type="xlsx"
+            name="overwrite_mrp.productos_menu_xlsx"
+            file="overwrite_mrp.productos_menu_xlsx"
+            attachment_use="False"
+        />
+
+        <record id="material_list_group_form" model="ir.ui.view">
+            <field name="name">overwrite_mrp.bom_register.form</field>
+            <field name="model">overwrite_mrp.bom_register</field>
+            <field name="arch" type="xml">
+                <form string="Registros de una lista de materiales" class="">
+                    <header>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <field name="name_menu" default_focus="1" placeholder="Name"/>
+                        </h1>
+                        <div class="oe_title">
+                            <span class="o_form_label">Registro de lista de material:</span>
+                        </div>
+
+                        <notebook>
+                            <page string="Listas asociadas">
+                                <field name="boms_id" widget="many2many" string="">
+                                    <tree string="Áreas" editable="bottom">
+                                        <field name="company_id" invisible="1"/>
+                                        <field width="300px"  name="product_tmpl_id" string="Producto"/>
+                                        <field name="repetitions" />
+                                        <field name="quantity" />
+                                        <field name="total" sum="Total" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="overwrite_mrp.register_action_window">
+          <field name="name">Informe Necesidad de Compra</field>
+          <field name="res_model">overwrite_mrp.bom_register</field>
+          <field name="view_mode">list,form</field>
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No hay ningún Registro creado.
+            </p>
+          </field>
+        </record>
+
+        <menuitem name="Menús" id="overwrite_mrp.menu_register_list" parent="mrp.menu_mrp_root" action="overwrite_mrp.register_action_window"/>
+    </data>
+</odoo>

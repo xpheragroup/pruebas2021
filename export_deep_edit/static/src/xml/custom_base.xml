@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve" inherit_id="web.template"> 
+    <t t-extend="Export.TreeItems">
+        <t t-jquery="t[t-set='has_child']" t-operation="replace">
+            <t t-set="has_child" t-value="field.children &amp;&amp; (field.id).split('/').length != 10" />
+        </t>
+    </t>
+</templates>

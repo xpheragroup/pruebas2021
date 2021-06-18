@@ -1,0 +1,101 @@
+<t t-name="studio_customization.studio_report_docume_2e135f8c-f6e1-4e97-847f-fcf7645c8eb3_copy_1">
+    <t t-call="web.basic_layout">
+        <t t-set="data" t-value="dict()"/>
+        <t t-set="products" t-value="list()"/>
+        
+        <t t-call="web.internal_layout">
+            <t t-foreach="docs" t-as="o">
+                <t t-esc="products.append({
+                            'name': o.name,
+                            'ref': o.origin,
+                            'user': o.user_id,
+                            'state': o.state,
+                            'product': o.product_id,
+                            'product_qty': o.product_qty,
+                            'uom': o.product_uom_id.name,
+                            'cost_center': o.cost_center,
+                            'cycle': o.cycle
+                        })"/>
+                <t t-foreach="o.move_raw_ids" t-as="line">
+                    <t t-if="line.product_id.id in data">
+                        <t t-set='reserved' t-value="data[line.product_id.id]['reserved']"/>
+                        <t t-set='std_qty' t-value="data[line.product_id.id]['std_qty']"/>
+                        <t t-esc="data.update({
+                            line.product_id.id: {
+                                'reserved': line.reserved_availability + reserved,
+                                'std_qty': line.std_quantity + std_qty,
+                                'product': line.product_id,
+                                'uom': line.product_uom
+                            }
+                        })"/>
+                        
+                    </t>
+                    <t t-else="">
+                        <t t-esc="data.update({
+                            line.product_id.id: {
+                                'product': line.product_id,
+                                'reserved': line.reserved_availability,
+                                'std_qty': line.std_quantity,
+                                'uom': line.product_uom
+                            }
+                        })"/>
+                    </t>
+                </t>
+            </t>
+        </t>
+        
+        <h2 t-if="len(products) > 1">Ordenes</h2>
+        <h2 t-else="">Orden</h2>
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Orden</th>
+                    <th>Referencia</th>
+                    <th>Responsable</th>
+                    <!--th>Estado</th-->
+                    <th>Producto</th>
+                    <th>Cantidad a Producir</th>
+                    <th>Centro de costos</th>
+                    <th>Ciclo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr t-foreach="products" t-as="o">
+                    <td t-esc="o['name']"/>
+                    <td t-esc="o['ref']"/>
+                    <td t-esc="o['user'].name"/>
+                    <!--td t-esc="o['state']"/-->
+                    <td t-esc="o['product'].name"/>
+                    <td t-esc="str(o['product_qty']) + ' ' + o['uom']"/>
+                    <td t-esc="o['cost_center'].name or ''"/>
+                    <td t-esc="o['cycle']"/>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h2>Productos</h2>
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    
+                    
+                    <th>Producto por comprar</th>
+                    
+                    <th>Unidad de medida</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr t-foreach="data" t-as="k" t-if="max(0, data[k]['std_qty'] - data[k]['product'].qty_available) > 0">
+                    <td t-esc="data[k]['product'].name"/>
+            
+            
+                    <td t-esc="'{:.4f}'.format(max(0, data[k]['std_qty'] - data[k]['product'].qty_available))"/>
+                    
+                    <td t-esc="data[k]['uom'].name"/>
+                </tr>
+            </tbody>
+        </table>
+        
+    </t>
+</t>

@@ -1,0 +1,53 @@
+<odoo>  
+    <record model="ir.ui.view" id="res_partner_requisition_inherit">
+        <field name="name">res.partner.requisition.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <notebook>
+                <page string="Presupuesto">
+                    <group string="Presupuesto">
+                        <group>
+                            <label for="presupuesto"/>
+                            <div class="o_row">
+                                <field name="presupuesto"/>COP/Periodo
+                            </div>
+                            <field name="gasto_periodo"/>
+                            <field name="last_approved_order"/>
+                            <field name="last_invoiced_order"/>
+                        </group>
+                        <group>
+                            <field name="date_beging"/>
+                            <label for="periodo"/>
+                            <div class="o_row">
+                                <field name="periodo"/>
+                                <field name="periodicidad" readonly="True"/>
+                            </div>
+                            <label for="periodos_transcurridos"/>
+                            <div class="o_row">
+                                <field name="periodos_transcurridos"/>Periodos
+                            </div>
+                            <field name="periodicidad"/>
+                            <field name="actual_date_beging"/>
+                            <field name="actual_date_end"/>
+                        </group>
+                    </group>
+                    <group string="Requisiciones"/>
+                    <field name="ordenes" readonly="True">
+                        <tree>
+                            <field name="order_id"/>
+                            <field name="product_template_id"/>
+                            <field name="product_uom_qty"/>
+                            <field name="qty_delivered"/>
+                            <field name="qty_invoiced"/>
+                            <field name="product_uom"/>
+                            <field name="price_unit"/>
+                            <field name="tax_id"/>
+                            <field name="price_subtotal"/>
+                        </tree>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

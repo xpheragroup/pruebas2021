@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>       
+        <report 
+            string="Vale de Entrega" 
+            id="report_vale_entrega" 
+            model="stock.picking" 
+            report_type="qweb-pdf"
+            name="overwrite_inventory.report_vale_entrega" 
+            file="overwrite_inventory.report_vale_entrega" 
+            print_report_name="'Vale de Entrega - %s' % (object.name)"
+        />
+
+        <report 
+            string="Vale de Entrega XLSX" 
+            id="report_vale_entrega_xlsx" 
+            model="stock.picking" 
+            report_type="xlsx"
+            name="overwrite_inventory.report_vale_entrega_xlsx" 
+            file="overwrite_inventory.report_vale_entrega_xlsx" 
+            print_report_name="'Vale de Entrega - %s' % (object.name)"
+        />
+
+        <template id="report_vale_entrega">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.internal_layout">
+                        
+                        <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+
+                        <h2>Vale de Entrega: <span t-field="o.name"/></h2>
+
+                        <![CDATA[&nbsp;]]>
+                        
+                        <div class="page">              
+                            <div class="oe_structure"/>
+
+                            <table class="table table-sm">
+                                <thead>  
+                                    <tr>
+                                        <th name="th_general" class="text-left"><strong>Información General</strong></th>
+                                        <th name="th_proveedor" class="text-left"><strong>Proveedor</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <td class="text-left">
+                                        <span>Nombre: <span t-field="o.company_id.partner_id"/></span><br/>
+                                        <span>NIT: <span t-field="o.company_id.partner_id.vat"/></span><br/>
+                                        <span>Dirección: <span t-field="o.company_id.partner_id.street"/></span><br/>
+                                        <span>Ciudad: <span t-field="o.company_id.partner_id.city"/></span><br/>
+                                        <span>Telefono: <span t-field="o.company_id.partner_id.phone"/></span><br/>
+                                        <span>Móvil: <span t-field="o.company_id.partner_id.mobile"/></span><br/>
+                                        <span>Correo Electronico: <span t-field="o.company_id.partner_id.email"/></span><br/>
+                                    </td>
+                                    <td class="text-left">
+                                        <span>Nombre: <span t-field="o.partner_id"/></span><br/>
+                                        <span>NIT: <span t-field="o.partner_id.vat"/></span><br/>
+                                        <span>Dirección: <span t-field="o.partner_id.street"/></span><br/>
+                                        <span>Ciudad: <span t-field="o.partner_id.city"/></span><br/>
+                                        <span>Telefono: <span t-field="o.partner_id.phone"/></span><br/>
+                                        <span>Móvil: <span t-field="o.partner_id.mobile"/></span><br/>
+                                        <span>Correo Electronico: <span t-field="o.partner_id.email"/></span><br/>
+                                    </td>
+                                </tbody>
+                            </table>
+
+                            <table class="table table-sm">
+                                <thead>  
+                                    <tr>
+                                        <th name="th_date" class="text-left"><strong>Fechas</strong></th>
+                                        <th name="th_none" class="text-left"><strong>Almacén</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <td class="text-left">
+                                        <span>Fecha de pedido: <span t-field="o.date"/></span><br/>
+                                        <span>Fecha de recepción: <span t-field="o.scheduled_date"/></span><br/>
+                                        <span>Documento Origen: <span t-field="o.origin_order"/></span><br/>
+                                    </td>
+                                    <td class="text-left">
+                                        <span>Ubicación Destino: <span t-field="o.location_dest_id"/></span><br/>
+                                    </td>
+                                </tbody>
+                            </table>
+                            
+                            <table class="table table-sm mt48" t-if="o.move_line_ids and o.state=='done'" name="stock_move_line_table">
+                                <t t-set="has_serial_number" t-value="o.move_line_ids.mapped('lot_id')"/>
+                                <p>DETALLE: </p>
+                                <thead>
+                                    <tr>
+                                        <th name="th_item" class="text-right"><strong>Item</strong></th>
+                                        <th name="th_producto" class="text-left"><strong>Producto</strong></th>
+                                        <th name="th_cantidad" class="text-right"><strong>Cantidad</strong></th>
+                                        <th name="th_unidad_medida" class="text-left"><strong>Unidad de Medida</strong></th>
+                                        <th name="th_lote" class="text-right"><strong>Lote</strong></th>
+                                        <th name="th_date" class="text-right"><strong>Fecha de Vencimiento</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.move_line_ids" t-as="move_line">
+                                        <td class="text-right">
+                                            <span t-esc="move_line_index + 1"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="move_line.product_id"/>
+                                            <p t-if="move_line.move_id.description_picking != move_line.product_id.name">
+                                                <span t-field="move_line.move_id.description_picking"/>
+                                            </p>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="move_line.qty_done"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-field="move_line.product_uom_id"/>
+                                        </td>
+                                        <td t-if="has_serial_number and move_line.lot_name" groups="stock.group_lot_on_delivery_slip" class="text-right">
+                                            <span t-field="move_line.lot_name"/>
+                                        </td>
+                                        <td t-elif="has_serial_number" groups="stock.group_lot_on_delivery_slip" class="text-right">
+                                            <span t-field="move_line.lot_id.name"/>
+                                        </td>
+                                        <td t-if="has_serial_number and move_line.lot_name" groups="stock.group_lot_on_delivery_slip" class="text-right">
+                                            <span t-field="move_line.lot_name.x_studio_fecha_de_vencimiento_1"/>
+                                        </td>
+                                        <td t-elif="has_serial_number" groups="stock.group_lot_on_delivery_slip" class="text-right">
+                                            <span t-field="move_line.lot_id.x_studio_fecha_de_vencimiento_1"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <![CDATA[&nbsp;]]>
+
+                            <p>TRAZABILIDAD: </p>
+                            <table class="table table-sm">
+                                <thead>  
+                                    <tr>
+                                        <th name="th_realizo" class="text-center"><strong>Realizado por</strong></th>
+                                        <th name="th_entrega" class="text-center"><strong>Quien entrega/recibe</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <td class="text-left">
+                                        <span>Nombre: <span t-field="o.x_studio_quien_termina"/></span><br/>
+                                        <span>Fecha y Hora: <span t-field="o.x_studio_fecha_termin"/></span><br/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span>Nombre: ________________________________________________</span><br/>
+                                        <span>Cargo: _________________________________________________</span><br/>
+                                        <span>Fecha: _________________________________________________</span><br/>
+                                        <span>Hora: __________________________________________________</span><br/>
+                                    </td>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="footer">
+                            <span>Page </span><span class="page" /> of <span class="topage" />
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

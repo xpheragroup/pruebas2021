@@ -1,0 +1,82 @@
+<t t-name="studio_main_report">
+    <t t-call="web.basic_layout">
+        <t t-foreach="docs" t-as="doc">
+            <t t-set="data" t-value="doc.get_all_products()"/>
+            <t t-set="products" t-value="data['products']"/>
+            <h2>Menus</h2>
+            <table class="table-sm table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Centro de Costos</th>
+                        <th>Ciclo</th>
+                        <th>Cantidad</th>
+                        <th>Repeticiones</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="data['material_lists']" t-as="bom">
+                        <th>
+                            <span t-field="bom.product_id"/>
+                        </th>
+                        <th>
+                            <span t-esc="bom.cost_center.name if bom.cost_center.name != 0 else ''"/>
+                        </th>
+                        <th>
+                            <span t-field="bom.cycle"/>
+                        </th>
+                        <th>
+                            <span t-field="bom.quantity"/>
+                        </th>
+                        <th>
+                            <span t-field="bom.repetitions"/>
+                        </th>
+                        <th>
+                            <span t-field="bom.total"/>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+            <h2>Productos</h2>
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Almacen</th>
+                        <th>Producto</th>
+                        <th>Disponible</th>
+                        <!--th>Reservado</th-->
+                        <th>Por comprar</th>
+                        <th>Total Requerido</th>
+                        <th>Unidad de Medida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="products" t-as="product">
+                        <th>
+                            <span t-esc="products[product]['warehouse']"/>
+                        </th>
+                        <th>
+                            <span t-esc="products[product]['product'].name"/>
+                        </th>
+                        <th>
+                            <span t-esc="'{:.4f}'.format(products[product]['availible_qty'])"/>
+                        </th>
+                        <!--th>
+                            <span t-esc="0*0"/>
+                        </th-->
+                        <th>
+                            <span t-esc="'{:.4f}'.format(max(0, products[product]['qty'] - products[product]['availible_qty']))"/>
+                        </th>
+                        <th>
+                            <span t-esc="'{:.4f}'.format(products[product]['qty'])"/>
+                        </th>
+                        <th>
+                            <span t-esc="products[product]['uom'].name"/>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </t>
+    </t>
+</t>

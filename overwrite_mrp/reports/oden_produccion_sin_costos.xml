@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<t t-name="mrp.report_mrporder">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="row">
+                        <div class="col-7">
+                            <h2>
+                                <span t-field="o.name"/>
+                            </h2>
+                        </div>
+                        <div class="col-5">
+                            <span class="text-right">
+                                <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)" style="width:350px;height:60px"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mt32 mb32">
+                        <div class="col-3" t-if="o.origin">
+                            <strong>Referencia:</strong>
+                            <br/>
+                            <span t-field="o.origin"/>
+                        </div>
+                        <div class="col-3">
+                            <strong>Responsable:</strong>
+                            <br/>
+                            <span t-field="o.user_id"/>
+                        </div>
+                    </div>
+                    <div class="row mt32 mb32">
+                        <div class="col-3">
+                            <strong>Centro de Costos:</strong>
+                            <br/>
+                            <span t-field="o.cost_center"/>
+                        </div>
+                        <div class="col-3">
+                            <strong>Ciclo:</strong>
+                            <br/>
+                            <span t-field="o.cycle"/>
+                        </div>
+                    </div>
+                    <div class="row mt32 mb32">
+                        <div class="col-3">
+                            <strong>Producto Terminado:</strong>
+                            <br/>
+                            <span t-field="o.product_id"/>
+                        </div>
+                        <div class="col-3">
+                            <strong>Cantidad a Producir:</strong>
+                            <br/>
+                            <span t-field="o.product_qty"/>
+                            <span t-field="o.product_uom_id.name" groups="uom.group_uom"/>
+                        </div>
+                    </div>
+                    <div t-if="o.workorder_ids">
+                        <h3>
+                            <t t-if="o.state == 'done'">Operaciones Completadas</t>
+                            <t t-else="">Operaciones Planeadas</t>
+                        </h3>
+                        <table class="table table-sm">
+                            <tr>
+                                <th>
+                                    <strong>Operacion</strong>
+                                </th>
+                                <th>
+                                    <strong>Centro de trabajo</strong>
+                                </th>
+                                <th>
+                                    <strong>No. de Actas</strong>
+                                </th>
+                            </tr>
+                            <tr t-foreach="o.workorder_ids" t-as="line2">
+                                <td>
+                                    <span t-field="line2.name"/>
+                                </td>
+                                <td>
+                                    <span t-field="line2.workcenter_id.name"/>
+                                </td>
+                                <td>
+                                    <span t-if="o.state != 'done'" t-field="line2.duration_expected"/>
+                                    <span t-if="o.state == 'done'" t-field="line2.duration"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h3 t-if="o.move_raw_ids">
+                        <t t-if="o.state == 'done'">
+                            Productos Consumidos
+                        </t>
+                        <t t-else="">
+                            Productos a Consumir
+                        </t>
+                    </h3>
+                    <table class="table table-sm" t-if="o.move_raw_ids">
+                        <t t-set="has_product_barcode" t-value="any(o.move_raw_ids.filtered(lambda x: x.product_id.barcode))"/>
+                        <thead>
+                            <tr>
+                                <th>Preparación</th>
+                                <th>Product</th>
+                                <th>Cantidad Estándar</th>
+                                <th>Cantidad Real</th>
+                                <th>Unidad de Medida</th>
+                                <th>Faltante</th>
+                                <th>Desviación</th>
+                                <th>Desviación %</th>
+                                <th>Notas</th>
+                                <th t-if="has_product_barcode" width="15%" class="text-center">Barcode</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-if="o.move_raw_ids">
+                                <tr t-foreach="o.move_raw_ids" t-as="raw_line">
+                                    <td>
+                                        <span t-field="raw_line.fab_product"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="raw_line.product_id"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="raw_line.std_quantity"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="raw_line.product_uom_qty"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="raw_line.product_uom"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="raw_line.missing"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="raw_line.deviation"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="raw_line.deviation_per"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="raw_line.note"/>
+                                    </td>
+                                    <td t-if="has_product_barcode" width="15%" class="text-center">
+                                        <t t-if="raw_line.product_id.barcode">
+                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', raw_line.product_id.barcode, 600, 100)" style="width:100%;height:35px" alt="Barcode"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <div class="oe_structure"/></div>
+                <div class="row mt32 mb32">
+                    <div class="col-3">
+                        <strong>Crea:</strong>
+                        <br/>
+                        <span t-field="o.create_uid"/>
+                        <br/>
+                        <span t-field="o.create_date"/>
+                    </div>
+                    <div class="col-3">
+                        <strong>Revisa:</strong>
+                        <br/>
+                        <span t-field="o.user_rev"/>
+                        <br/>
+                        <span t-field="o.date_rev"/>
+                    </div>
+                    <div class="col-3">
+                        <strong>Aprueba:</strong>
+                        <br/>
+                        <span t-field="o.user_apr"/>
+                        <br/>
+                        <span t-field="o.date_apr"/>
+                    </div>
+                    <div class="col-3">
+                        <strong>Finaliza:</strong>
+                        <br/>
+                        <span t-field="o.user_ter"/>
+                        <br/>
+                        <span t-field="o.date_ter"/>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </t>
+</t>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve" inherit_id="point_of_sale.template"> 
+    <t t-extend="PaymentScreen-Numpad">
+        <t t-jquery="button[data-action='-']" t-operation="replace">
+            <button class="mode-button disabled-mode" disabled="1">+/-</button>
+        </t>
+    </t>
+    <t t-extend="NumpadWidget">
+        <t t-jquery="button[class='input-button numpad-minus']" t-operation="replace">
+            <button class="mode-button disabled-mode" disabled="1">+/-</button>
+        </t>
+    </t>
+    <t t-extend="ProductListWidget">
+        <t t-jquery="div[class='product-list-container']" t-operation="replace">
+            <div class='product-list-container'>
+                <div class="product-list-scroller touch-scrollable">
+                    <t t-if="widget.product_list.length != 0">
+                        <t t-js="ctx">
+                            ctx.widget.product_list.sort((a, b) => a.display_name.localeCompare(b.display_name));
+                        </t>
+                        <div class="product-list">
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="product-list-empty">
+                            <t t-if="widget.product_list.length == 0 &amp;&amp; !!widget.search_word">
+                                <p>No results found for "<b t-esc="widget.search_word"></b>".</p>
+                            </t>
+                            <t t-else="">
+                                <p>There are no products in this category.</p>
+                            </t>
+                        </div>
+                    </t>
+                </div>
+                <span class="placeholder-ScrollbarWidget" />
+            </div>
+        </t>
+    </t>
+    <t t-extend="OrderReceipt">
+        <t t-jquery="div[class='pos-receipt']" t-operation="attributes">
+            <attribute name="style">width:320px;</attribute>
+        </t>
+        <t t-jquery="div[class='pos-receipt-contact']" t-operation="replace">
+            <div class="pos-receipt-contact">
+                <t t-if='receipt.company.contact_address'>
+                    <div><t t-esc='receipt.company.contact_address' /></div>
+                </t>
+                <t t-if='receipt.company.phone'>
+                    <div>Tel:<t t-esc='receipt.company.phone' /></div>
+                </t>
+                <t t-if='receipt.company.vat'>
+                    <div>NIT <t t-esc='receipt.company.vat' /></div>
+                </t>
+                <t t-if='receipt.company.email'>
+                    <div><t t-esc='receipt.company.email' /></div>
+                </t>
+                <t t-if='receipt.company.website'>
+                    <div><t t-esc='receipt.company.website' /></div>
+                </t>
+                <t t-if='receipt.numeracion_facturacion'>
+                    <div>Sistemas P.O.S.</div>
+                    <div>Autorización numeración facturación <t t-esc="receipt.numeracion_facturacion"/></div>
+                </t>
+                <t t-if='receipt.range0 and receipt.range1'>
+                    <div>Rango autorizado del No <t t-esc="receipt.range0"/> hasta la <t t-esc="receipt.range1"/></div>
+                    <t t-raw='receipt.header_html' />
+                </t>
+                <t t-if="receipt.l10n_co_dian !== false and receipt.fact_code and receipt.l10n_co_dian !== undefined">
+                    <div style="word-wrap:break-word;"><t t-esc="receipt.fact_code"/><t t-esc="receipt.l10n_co_dian.split('/')[1]"/></div>
+                </t>
+                <t t-if='receipt.header_html'>
+                    <t t-raw='receipt.header_html' />
+                </t>
+                <t t-if='!receipt.header_html and receipt.header'>
+                    <div><t t-esc='receipt.header' /></div>
+                </t>
+                <t t-if='receipt.cashier'>
+                    <div class='cashier'>
+                        <div>Served by <t t-esc='receipt.cashier' /></div>
+                    </div>
+                </t>
+            </div>
+        </t>
+        <t t-jquery="div[class='orderlines']" t-operation="replace">
+            <div class='orderlines'>
+                <t t-foreach='receipt.orderlines' t-as='line'>
+                    <t t-set='simple' t-value='(line.discount === 0 and line.unit_name === "Units" and line.quantity === 1 and !discount_to_show and !(line.display_discount_policy == "without_discount" &amp;&amp; line.price != line.price_lst))' />
+                     
+                    <t t-if='simple'>
+                        <div>
+                            [<t t-esc='line.product_code' />] <t t-esc='line.product_name_wrapped[0]' /><span t-esc='widget.format_currency_no_symbol(line.price_display)' class="price_display pos-receipt-right-align"/></div><t t-call="OrderReceiptWrappedProductNameLines"/>
+                        </t>
+                    <t t-if='!simple'>
+                        <div>
+                            [<t t-esc='line.product_code' />] <t t-esc='line.product_name_wrapped[0]'/>
+                        </div>
+                        <t t-call="OrderReceiptWrappedProductNameLines"/>
+                        <t t-if="line.display_discount_policy == 'without_discount' &amp;&amp; line.price != line.price_lst">
+                            <div class="pos-receipt-left-padding">
+                                <t t-esc="widget.format_currency_no_symbol(line.price_lst)" />-><t t-esc="widget.format_currency_no_symbol(line.price)" />
+                            </div>
+                        </t>
+                        <t t-elif='line.discount !== 0'>
+                            <div class="pos-receipt-left-padding">
+                                <t t-if="pos.config.iface_tax_included === 'total'">
+                                    <t t-esc="widget.format_currency_no_symbol(line.price_with_tax_before_discount)"/>
+                                </t>
+                                <t t-else="">
+                                    <t t-esc="widget.format_currency_no_symbol(line.price)"/>
+                                </t>
+                            </div>
+                        </t>
+                        <t t-if='line.discount !== 0'>
+                            <div class="pos-receipt-left-padding">
+                                Discount: <t t-esc='line.discount' />%
+                            </div>
+                        </t>
+                        <div class="pos-receipt-left-padding">
+                            <t t-esc="Math.round(line.quantity * Math.pow(10, pos.dp['Product Unit of Measure'])) / Math.pow(10, pos.dp['Product Unit of Measure'])"/>
+                            <t t-if='line.unit_name !== "Units"' t-esc='line.unit_name'/>
+                            x
+                            <t t-esc='widget.format_currency_no_symbol(line.price_display_one)' />
+                            <span class="price_display pos-receipt-right-align">
+                                <t t-esc='widget.format_currency_no_symbol(line.price_display)'/>
+                            </span>
+                        </div>
+                    </t>
+                    <t t-foreach='line.taxes' t-as='tax'>
+                        <div class="pos-receipt-left-padding">
+                            <span t-esc='tax'/>
+                        </div>
+                    </t>
+                </t>
+            </div>
+        </t>
+        <t t-jquery="div[class='pos-receipt-order-data']" t-operation="replace">
+            <t t-js='ctx'>console.log(ctx)</t>
+            <div class="pos-receipt-order-data">
+                <div style="transform: rotate(-90deg); position: relative; right: -14.1em; top: -12em;">
+                    Xphera Group S.A.S. 901.008.416-5 Odoo P.O.S.
+                </div>
+                <div>No nomos grandes contribuyentes</div>
+                <div>Responsables de IVA</div>
+                <div>Actividad Económica 5629</div>
+                <div>Somos agentes retenedor de ICA</div>
+                <div>No autorretenedor</div>
+                <div><t t-esc='receipt.date.localestring' /></div>
+                <t t-if="receipt.l10n_co_dian !== false and receipt.l10n_co_dian !== undefined">
+                    <div style="word-wrap:break-word;"><t t-esc="receipt.l10n_co_dian.split('/')[0]"/></div>
+                </t>
+            </div>
+        </t>
+    </t>
+    <t t-extend="OrderSelectorWidget">
+        <t t-jquery="span[class='order-button square neworder-button']" t-operation="replace">
+        </t>
+        <t t-jquery="span[class='order-button square deleteorder-button']" t-operation="replace">
+        </t>
+    </t>
+</templates>

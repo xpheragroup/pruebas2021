@@ -1,0 +1,8 @@
+<odoo>
+
+        <menuitem id="main_internal_requisitions_menu" name="Requisiciones"
+                web_icon="internal_requisitions,static/Internal Requisitions.png"
+                groups="group_internal_requisitions_manager"
+                action="purchase_list_action"/>
+
+</odoo>

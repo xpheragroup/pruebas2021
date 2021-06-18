@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="account_fiscal_position_admon" model="account.fiscal.position.template">
+        <field name="name">Administración0</field>
+        <field name="auto_apply" eval="False"/>
+        <field name="country_id" ref="base.co"/>
+        <field name="account_ids" eval="[(5,0,0),
+            (0,0, {
+                'account_src_id': ref('co_puc_73102501'),
+                'account_dest_id': ref('co_puc_51102501'),
+            }),
+        ]"/>
+        <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+    </record>
+
+    <record id="account_fiscal_position_admon" model="account.fiscal.position">
+        <field name="name">Administración1</field>
+        <field name="auto_apply" eval="False"/>
+        <field name="country_id" ref="base.co"/>
+    </record>
+</odoo>

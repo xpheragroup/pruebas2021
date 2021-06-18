@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="fiscal_position_template_co" model="account.fiscal.position.template">
+            <field name="name">Administración</field>
+            <field name="auto_apply" eval="False" />
+            <field name="vat_required" eval="False" />
+            <field name="chart_template_id" ref="l10n_co_fjsb_chart_template_generic"/>
+        </record>
+
+        <record id="fiscal_position_account_template_co_1" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73102501" />
+            <field name="account_dest_id" ref="co_puc_51102501" />
+        </record>
+        <record id="fiscal_position_account_template_co_2" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73103501" />
+            <field name="account_dest_id" ref="co_puc_51103501" />
+        </record>
+        <record id="fiscal_position_account_template_co_3" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73151501" />
+            <field name="account_dest_id" ref="co_puc_51151501" />
+        </record>
+        <record id="fiscal_position_account_template_co_4" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73201001" />
+            <field name="account_dest_id" ref="co_puc_51201001" />
+        </record>
+
+        <record id="fiscal_position_account_template_co_5" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73306001" />
+            <field name="account_dest_id" ref="co_puc_51306001" />
+        </record>
+        <record id="fiscal_position_account_template_co_6" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73350501" />
+            <field name="account_dest_id" ref="co_puc_51350501" />
+        </record>
+        <record id="fiscal_position_account_template_co_7" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73351501" />
+            <field name="account_dest_id" ref="co_puc_51351501" />
+        </record>
+        <record id="fiscal_position_account_template_co_8" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73352501" />
+            <field name="account_dest_id" ref="co_puc_51352501" />
+        </record>
+        <record id="fiscal_position_account_template_co_9" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73353001" />
+            <field name="account_dest_id" ref="co_puc_51353001" />
+        </record>
+        <record id="fiscal_position_account_template_co_10" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73353501" />
+            <field name="account_dest_id" ref="co_puc_51353501" />
+        </record>
+        <record id="fiscal_position_account_template_co_11" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73354001" />
+            <field name="account_dest_id" ref="co_puc_51354001" />
+        </record>
+        <record id="fiscal_position_account_template_co_12" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73354501" />
+            <field name="account_dest_id" ref="co_puc_51354501" />
+        </record>
+        <record id="fiscal_position_account_template_co_13" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73355001" />
+            <field name="account_dest_id" ref="co_puc_51355001" />
+        </record>
+        <record id="fiscal_position_account_template_co_14" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73355501" />
+            <field name="account_dest_id" ref="co_puc_51355501" />
+        </record>
+        <record id="fiscal_position_account_template_co_15" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73400501" />
+            <field name="account_dest_id" ref="co_puc_51400501" />
+        </record>
+        <record id="fiscal_position_account_template_co_16" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73401501" />
+            <field name="account_dest_id" ref="co_puc_51401501" />
+        </record>
+        <record id="fiscal_position_account_template_co_17" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73451001" />
+            <field name="account_dest_id" ref="co_puc_51451001" />
+        </record>
+        <record id="fiscal_position_account_template_co_18" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73451501" />
+            <field name="account_dest_id" ref="co_puc_51451501" />
+        </record>
+        <record id="fiscal_position_account_template_co_19" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73501501" />
+            <field name="account_dest_id" ref="co_puc_51501501" />
+        </record>
+        <record id="fiscal_position_account_template_co_20" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73550501" />
+            <field name="account_dest_id" ref="co_puc_51550501" />
+        </record>
+        <record id="fiscal_position_account_template_co_21" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73553001" />
+            <field name="account_dest_id" ref="co_puc_51553001" />
+        </record>
+        <record id="fiscal_position_account_template_co_22" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73952001" />
+            <field name="account_dest_id" ref="co_puc_51952001" />
+        </record>
+        <record id="fiscal_position_account_template_co_23" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73952501" />
+            <field name="account_dest_id" ref="co_puc_51952501" />
+        </record>
+        <record id="fiscal_position_account_template_co_24" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73953001" />
+            <field name="account_dest_id" ref="co_puc_51953001" />
+        </record>
+        <record id="fiscal_position_account_template_co_25" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73953501" />
+            <field name="account_dest_id" ref="co_puc_51953501" />
+        </record>
+        <record id="fiscal_position_account_template_co_26" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73954501" />
+            <field name="account_dest_id" ref="co_puc_51954501" />
+        </record>
+        <record id="fiscal_position_account_template_co_27" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73956001" />
+            <field name="account_dest_id" ref="co_puc_51956001" />
+        </record>
+        <record id="fiscal_position_account_template_co_28" model="account.fiscal.position.account.template">
+            <field name="position_id" ref="fiscal_position_template_co" />
+            <field name="account_src_id" ref="co_puc_73959501" />
+            <field name="account_dest_id" ref="co_puc_51959501" />
+        </record>
+    </data>
+</odoo>

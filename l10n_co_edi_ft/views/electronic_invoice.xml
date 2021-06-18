@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="tim_section_inherit" inherit_id="l10n_co_edi_ubl_2_1.tim_section">
+            <xpath expr="//IMP" position="replace">
+                <IMP t-foreach="move_lines.get(move_line)" t-as="move">
+                    <IMP_1 t-esc="move.tax_line_id.l10n_co_edi_type.code"/>
+                    <IMP_2 t-esc="'%.2f' % (abs((move.amount_currency or move.balance) * 100 / 15) if move.tax_line_id.l10n_co_edi_type.code == '05' else move.tax_base_amount if move.currency_id == move.company_id.currency_id else move.company_id.currency_id._convert(move.tax_base_amount, move.currency_id, move.company_id, invoice.invoice_date))"/>
+                    <IMP_3 t-esc="invoice.currency_id.name"/>
+                    <IMP_4 t-esc="'%.2f' % abs(move.amount_currency or move.balance)"/>
+                    <IMP_5 t-esc="invoice.currency_id.name"/>
+                    <t t-if="move.tax_line_id.amount_type == 'fixed'">
+                        <IMP_7 t-esc="'1'"/>
+                        <IMP_8 t-esc="'BO' if move.tax_line_id.l10n_co_edi_type.code == '22' else '94'"/>
+                        <IMP_9 t-esc="move.tax_line_id.amount"/>
+                        <IMP_10 t-esc="invoice.currency_id.name"/>
+                    </t>
+                    <t t-else="">
+                        <IMP_6 t-esc="'15' if move.tax_line_id.l10n_co_edi_type.code == '05' else abs(move.tax_line_id.amount)"/>
+                    </t>
+                </IMP>
+            </xpath>
+        </template>
+        <template id="electronic_invoice_body_inherit" inherit_id="l10n_co_edi_ubl_2_1.electronic_invoice_body">
+            <xpath expr="//EMI" position="replace">
+                <EMI>
+                    <EMI_1 t-esc="invoice._l10n_co_edi_get_partner_type(company_partner)"/>
+                    <EMI_2 t-esc="company_partner._get_vat_without_verification_code()"/>
+                    <EMI_3 t-esc="invoice._l10n_co_edi_get_carvajal_code_for_document_type(company_partner)"/>
+                    <EMI_4 t-esc="company_partner.l10n_co_edi_fiscal_regimen"/>
+                    <EMI_6 t-esc="company_partner.display_name"/>
+                    <EMI_7 t-esc="company_partner.l10n_co_edi_commercial_name or company_partner.name"/>
+                    <EMI_8/>
+                    <EMI_9/>
+                    <EMI_10 t-esc="invoice._l10n_co_edi_get_company_address(company_partner)"/>
+                    <EMI_11 t-esc="str(company_partner.state_id.l10n_co_edi_code).zfill(2)"/>
+                    <EMI_12/>
+                    <EMI_13 t-esc="company_partner.city_id.name"/>
+                    <EMI_14 t-esc="company_partner.zip"/>
+                    <EMI_15 t-esc="company_partner.country_id.code"/>
+                    <EMI_18/>
+                    <EMI_19 t-esc="company_partner.state_id.name"/>
+                    <EMI_21 t-esc="company_partner.country_id.name"/>
+                    <EMI_22 t-esc="company_partner._get_vat_verification_code()"/>
+                    <EMI_23 t-esc="str(company_partner.city_id.l10n_co_edi_code).zfill(5)"/>
+                    <EMI_24 t-esc="company_partner.l10n_co_edi_commercial_name or company_partner.name"/>
+                    <TAC>
+                        <TAC_1>
+                            <t t-esc="';'.join(company_partner._l10n_co_edi_get_fiscal_values().mapped('name'))"/>
+                        </TAC_1>
+                    </TAC>
+                    <DFE>
+                        <DFE_1 t-esc="str(company_partner.city_id.l10n_co_edi_code).zfill(5)"/>
+                        <DFE_2 t-esc="str(company_partner.state_id.l10n_co_edi_code).zfill(2)"/>
+                        <DFE_3 t-esc="company_partner.country_id.code"/>
+                        <DFE_4 t-esc="str(company_partner.zip).zfill(5)"/>
+                        <DFE_5 t-esc="company_partner.country_id.name"/>
+                        <DFE_6 t-esc="company_partner.state_id.name"/>
+                        <DFE_7 t-esc="company_partner.city_id.name"/>
+                        <DFE_8/>
+                    </DFE>
+                    <CDE>
+                        <CDE_1 t-esc="'2' if sales_partner.type == 'delivery' else '1'"/>
+                        <CDE_2 t-esc="sales_partner.function or 'Representante de Ventas'"/>
+                        <CDE_3 t-esc="company_partner.phone"/>
+                        <CDE_4 t-esc="company_partner.email"/>
+                    </CDE>
+                    <GTE t-if="tax_types">
+                        <GTE_1 t-esc="tax_types[0].code"/>
+                        <GTE_2 t-esc="tax_types[0].name"/>
+                    </GTE>
+                </EMI>
+            </xpath>
+            <xpath expr="//ADQ" position="replace">
+                <ADQ>
+                    <ADQ_1 t-esc="invoice._l10n_co_edi_get_partner_type(invoice_partner)"/>
+                    <ADQ_2 t-esc="invoice_partner._get_vat_without_verification_code()"/>
+                    <ADQ_3 t-esc="invoice._l10n_co_edi_get_carvajal_code_for_document_type(invoice_partner)"/>
+                    <ADQ_4 t-esc="invoice_partner.l10n_co_edi_fiscal_regimen"/>
+                    <ADQ_5 t-esc="invoice_partner.ref"/>
+                    <ADQ_6 t-esc="invoice_partner.display_name"/>
+                    <ADQ_7 t-esc="invoice_partner.l10n_co_edi_commercial_name or invoice_partner.name"/>
+                    <ADQ_8 t-esc="invoice_partner.name"/>
+                    <ADQ_9 t-esc="invoice_partner.name"/>
+                    <t t-if="invoice_partner.vat != '222222222222'">
+                        <ADQ_10 t-esc="invoice._l10n_co_edi_get_company_address(invoice_partner)"/>
+                        <ADQ_11 t-esc="str(invoice_partner.state_id.l10n_co_edi_code).zfill(2)"/>
+                        <ADQ_12/>
+                        <ADQ_13 t-esc="invoice_partner.city"/>
+                        <ADQ_14 t-esc="invoice_partner.zip"/>
+                        <ADQ_15 t-esc="invoice_partner.country_id.code"/>
+                        <ADQ_18/>
+                        <ADQ_19 t-esc="invoice_partner.state_id.name"/>
+                        <ADQ_21 t-esc="invoice_partner.country_id.name"/>
+                        <ADQ_22 t-esc="invoice_partner._get_vat_verification_code()"/>
+                        <ADQ_23 t-esc="str(invoice_partner.city_id.l10n_co_edi_code).zfill(5)"/>
+                    </t>
+                    <t t-else="">
+                        <ADQ_10/>
+                        <ADQ_11/>
+                        <ADQ_12/>
+                        <ADQ_13/>
+                        <ADQ_14/>
+                        <ADQ_15/>
+                        <ADQ_18/>
+                        <ADQ_19/>
+                        <ADQ_21/>
+                        <ADQ_22/>
+                        <ADQ_23/>
+                    </t>
+                    <ADQ_24 t-esc="invoice_partner._get_vat_without_verification_code()"/>
+                    <TCR>
+                        <TCR_1><t t-esc="';'.join(invoice_partner.commercial_partner_id._l10n_co_edi_get_fiscal_values().mapped('name'))"/></TCR_1>
+                    </TCR>
+
+                    <ICR/>
+
+                    <DFA t-if="invoice_partner.vat != '222222222222'">
+                        <DFA_1 t-esc="invoice_partner.country_id.code"/>
+                        <DFA_2 t-esc="str(invoice_partner.state_id.l10n_co_edi_code).zfill(2)"/>
+                        <DFA_3 t-esc="str(invoice_partner.zip)"/>
+                        <DFA_4 t-esc="str(invoice_partner.city_id.l10n_co_edi_code).zfill(5)"/>
+                        <DFA_5 t-esc="str(invoice_partner.city_id.l10n_co_edi_code).zfill(5)"/>
+                        <DFA_6 t-esc="str(invoice_partner.state_id.l10n_co_edi_code)"/>
+                        <DFA_7 t-esc="str(invoice_partner.city_id.name)"/>
+                        <DFA_8 t-esc="str(invoice_partner.street)"/>
+                    </DFA>
+
+                    <CDA>
+                        <CDA_1 t-esc="'2' if invoice_partner.type == 'delivery' else '1'"/>
+                        <CDA_2 t-esc="'%s/%s' % (invoice_partner.name, invoice_partner.function)"/>
+                        <CDA_3 t-esc="invoice_partner.phone"/>
+                        <CDA_4 t-esc="invoice_partner.email"/>
+                    </CDA>
+
+                    <GTA t-if="tax_types">
+                        <GTA_1 t-esc="tax_types[0].code"/>
+                        <GTA_2 t-esc="tax_types[0].name"/>
+                    </GTA>
+                </ADQ>
+            </xpath>
+            <xpath expr="//ICR" position="replace">
+            </xpath>
+            <xpath expr="//ITD" position="replace">
+            </xpath>
+            <xpath expr="//ORC" position="replace">
+            </xpath>
+            <xpath expr="//IEN" position="replace">
+                <IEN>
+                    <IEN_1 t-esc="shipping_partner.street if shipping_partner else ''"/>
+                    <IEN_2 t-esc="str(invoice.partner_shipping_id.state_id.l10n_co_edi_code).zfill(2) if 'partner_shipping_id' in invoice._fields else str(invoice_partner.state_id.l10n_co_edi_code).zfill(2)"/>
+                    <IEN_3/>
+                    <IEN_4 t-esc="shipping_partner.city if shipping_partner else ''"/>
+                    <IEN_5 t-esc="shipping_partner.zip if shipping_partner and shipping_partner.zip else '050001'"/>
+                    <IEN_6 t-esc="shipping_partner.country_id.code if shipping_partner else ''"/>
+                    <IEN_7 t-esc="invoice_partner.name"/>
+                    <IEN_8 t-esc="invoice._l10n_co_edi_get_delivery_date()"/>
+                    <IEN_12 t-esc="str(invoice.partner_shipping_id.city_id.l10n_co_edi_code).zfill(5) if 'partner_shipping_id' in invoice._fields else str(invoice_partner.city_id.l10n_co_edi_code).zfill(5)"/>
+                </IEN>
+            </xpath>
+            <xpath expr="//CDN" position="replace">
+            </xpath>
+            <xpath expr="//DCN" position="replace">
+            </xpath>
+            <xpath expr="//FE1" position="replace">
+            </xpath>
+            <xpath expr="//IIM" position="replace">
+                <IIM>
+                    <IIM_1 t-esc="tax['code']"/>
+                    <IIM_2 t-esc="'%.2f' % abs(tax['tax'])"/>
+                    <IIM_3 t-esc="invoice.currency_id.name"/>
+                    <IIM_4 t-esc="'%.2f' % (abs(tax['tax'] * 100 / 15) if tax['code'] == '05' else line.price_subtotal)"/>
+                    <IIM_5 t-esc="invoice.currency_id.name"/>
+                    <t t-if="tax['amount_type'] == 'fixed'">
+                        <IIM_7 t-esc="'1'"/>
+                        <IIM_8 t-esc="'BO' if tax['code'] == '22' else '94'"/>
+                        <IIM_9 t-esc="tax['rate']"/>
+                        <IIM_10 t-esc="invoice.currency_id.name"/>
+                    </t>
+                    <t t-else="">
+                        <IIM_6 t-esc="'15' if tax['code'] == '05' else abs(tax['rate'])"/>
+                    </t>
+                </IIM>
+            </xpath>
+            <xpath expr="//IAE" position="replace">
+            </xpath>
+            <xpath expr="//MEP_3" position="replace">
+                <MEP_3 t-esc="invoice.invoice_date_due if not invoice.l10n_co_edi_is_direct_payment else None"/>
+            </xpath>
+            <xpath expr="//IRF" position="replace">
+            </xpath>
+        </template>
+    </data>
+</odoo>

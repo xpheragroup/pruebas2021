@@ -1,0 +1,20 @@
+<odoo>
+
+    <record model="ir.ui.view" id="stock_picking_requisition">
+        <field name="name">stock.picking</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='location_dest_id']" position="after">
+                <field name="consolidate_picking" attrs="{'invisible':[('state','not in','draft')]}"/>
+                <field name="consolidate_requisition_picking" widget="many2many_tags" attrs="{'invisible': ['|',('consolidate_picking', '=', False),('state', 'not in', 'draft')],'readonly': [('state', 'not in','draft')]}"/>
+                <field name="consolidate_requisition_reference_picking" attrs="{'invisible': [('consolidate_picking', '=', False)],'readonly':[('state', 'not in', 'draft')]}"/>            
+            </xpath>
+            <xpath expr="//field[@name='move_ids_without_package']/tree//field[@name='product_uom_qty']" position="after">
+                <field name="internal_requisition_picking" invisible="True"/>
+                <field name="code_internal_requisition_picking" attrs="{'readonly':[('state','not in','draft')]}" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

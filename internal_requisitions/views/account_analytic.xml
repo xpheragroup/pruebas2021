@@ -1,0 +1,15 @@
+<odoo>  
+    <record model="ir.ui.view" id="account_analytic_account_requisition_inherit">
+        <field name="name">account.analytic.account.requisition.inherit</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="city_id"/>
+                <field name="department_id" widget="many2one_tags"/>
+                <field name="region_id" widget="selection"/>
+                <field name="country_id" widget="many2one_tags"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

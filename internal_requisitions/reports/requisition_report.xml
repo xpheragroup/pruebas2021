@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>       
+        <report 
+            string="Requisición" 
+            id="report_purchase_requisition" 
+            model="purchase.order" 
+            report_type="qweb-pdf"
+            name="internal_requisitions.reporte_requisition_interna" 
+            file="internal_requisitions.reporte_requisition_interna" 
+            print_report_name="'Requisición - %s' % (object.name)"
+        />
+
+        <report 
+            string="Requisición xlsx" 
+            id="report_purchase_requisition_xlsx" 
+            model="purchase.order" 
+            report_type="xlsx"
+            name="internal_requisitions.reporte_requisition_interna_xlsx" 
+            file="internal_requisitions.reporte_requisition_interna_xlsx" 
+            print_report_name="'Requisición - %s' % (object.name)"
+        />
+
+        <template id="reporte_requisition_interna">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.internal_layout">
+                        <span t-esc="o.set_user_gen()"/>
+                        <div class="header">
+                            <h2>Requisición: <span t-field="o.name"/></h2>
+                        </div>
+                        <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+                        
+                        <h2>Requisición: <span t-field="o.name"/></h2>
+                        <p>Total Insumos: <span t-field="o.total_insumos"/></p>
+                        <p>Total Unidades: <span t-field="o.total_unidades"/></p>
+                        <p>Descripción: <span t-field="o.description"/></p>
+
+                        <![CDATA[&nbsp;]]>
+                        
+                        <div class="page">
+                            
+                            <div class="oe_structure"/>
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th name="th_description"><strong>Producto</strong></th>
+                                        <th name="th_centro_costos" class="text-center"><strong>Centro de Costos</strong></th>
+                                        <th name="th_quantity" class="text-right"><strong>Cantidad</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.order_line" t-as="order_line">
+                                        <tr t-att-class="'bg-200 font-weight-bold o_line_section' if order_line.display_type == 'line_section' else 'font-italic o_line_note' if order_line.display_type == 'line_note' else ''">
+                                            <t t-if="not order_line.display_type">
+                                                <td id="product">
+                                                    <span t-field="order_line.name"/>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span t-field="order_line.account_analytic_id"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-field="order_line.product_qty"/>
+                                                    <span t-field="order_line.product_uom" groups="uom.group_uom"/>
+                                                </td>
+                                            </t>
+                                            <t t-else="">
+                                                <td colspan="99" id="section">
+                                                    <span t-field="order_line.name"/>
+                                                </td>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+
+                            <![CDATA[&nbsp;]]>
+
+                            <table class="table table-sm">
+                                <thead>  
+                                    <tr>
+                                        <th name="th_creo" class="text-center"><strong>Creó</strong></th>
+                                        <th name="th_aprobo" class="text-center"><strong>Aprobó</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <td class="text-center">
+                                        <span><span t-field="o.user_cre"/></span><br/>
+                                        <span><span t-field="o.date_cre"/></span><br/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span><span t-field="o.user_apr"/></span><br/>
+                                        <span><span t-field="o.date_apr"/></span><br/>
+                                    </td>
+                                </tbody>
+                            </table>
+                            <p t-field="o.notes"/>
+                            <div class="oe_structure"/>
+                        </div>
+                        <div class="footer">
+                            <span>Page </span><span class="page" /> of <span class="topage" />
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

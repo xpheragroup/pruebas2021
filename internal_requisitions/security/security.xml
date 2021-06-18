@@ -1,0 +1,7 @@
+<odoo>
+
+    <record id="group_internal_requisitions_manager" model="res.groups">
+        <field name="name">InternalRequisitions / Manager</field>
+    </record>
+
+</odoo>

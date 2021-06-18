@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+      <record id="product_cat_multi_comp_rule" model="ir.rule">
+        <field name="name">Product category multi company rule</field>
+        <field name="model_id" ref="model_product_category"/>
+        <field eval="True" name="global"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+      </record>
+    </data>
+</odoo>

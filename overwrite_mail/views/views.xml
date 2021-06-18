@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="overwrite_mail.list">
+      <field name="name">overwrite_mail list</field>
+      <field name="model">overwrite_mail.overwrite_mail</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="overwrite_mail.action_window">
+      <field name="name">overwrite_mail window</field>
+      <field name="res_model">overwrite_mail.overwrite_mail</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="overwrite_mail.action_server">
+      <field name="name">overwrite_mail server</field>
+      <field name="model_id" ref="model_overwrite_mail_overwrite_mail"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="overwrite_mail" id="overwrite_mail.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="overwrite_mail.menu_1" parent="overwrite_mail.menu_root"/>
+    <menuitem name="Menu 2" id="overwrite_mail.menu_2" parent="overwrite_mail.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="overwrite_mail.menu_1_list" parent="overwrite_mail.menu_1"
+              action="overwrite_mail.action_window"/>
+    <menuitem name="Server to list" id="overwrite_mail" parent="overwrite_mail.menu_2"
+              action="overwrite_mail.action_server"/>
+-->
+  </data>
+</odoo>

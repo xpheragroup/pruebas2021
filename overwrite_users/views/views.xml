@@ -1,0 +1,14 @@
+<odoo>
+  <data>
+    <record id="view_users_form" model="ir.ui.view">
+      <field name="name">res.users.form</field>
+      <field name="model">res.users</field>
+      <field name="inherit_id" ref="base.view_users_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='company_id']" position="after">
+          <field string="Almacenes" name="warehouse_ids" widget="many2many_tags" attrs="{'invisible': [('in_group_100', '=', False)]}"/>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>
