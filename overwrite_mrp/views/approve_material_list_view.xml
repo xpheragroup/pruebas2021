@@ -32,5 +32,16 @@
                 </group>
             </field>
         </record>
+
+        <record id="mrp_bom_inherit_form" model="ir.ui.view">
+            <field name="name">mrp.bom.inherit.form</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="before">
+                    <field name="mrp_bom_lines_tracking" invisible="True"/>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>

@@ -536,3 +536,39 @@ class ResPartnerBank(models.Model):
     journal_id = fields.One2many(tracking=1)
     l10n_mx_edi_clabe = fields.Char(tracking=1)
     aba_bsb = fields.Char(tracking=1)
+
+class MrpBom(models.Model):
+    _inherit = "mrp.bom"
+
+    product_tmpl_id = fields.Many2one(tracking=1)
+    product_id = fields.Many2one(tracking=1)  
+    product_qty = fields.Float(tracking=1)
+    cost_center = fields.Many2one(tracking=1)
+    food_time = fields.Many2one(tracking=1)
+    type = fields.Selection(tracking=1)
+    bom_line_ids = fields.One2many(tracking=1)
+    product_uom_id = fields.Many2one(tracking=1)
+    product_uom_category_id = fields.Many2one(tracking=1)
+    sequence = fields.Integer(tracking=1)
+    routing_id = fields.Many2one(tracking=1)
+    picking_type_id = fields.Many2one(tracking=1)
+    company_id = fields.Many2one(tracking=1)
+    cycle = fields.Integer(tracking=1)
+    food_time = fields.Many2one(tracking=1)
+    approval_user = fields.Many2one(tracking=1)
+    approval_date = fields.Datetime(tracking=1)
+    repetitions = fields.Integer(tracking=1)
+    total = fields.Integer(tracking=1)
+    code = fields.Char(tracking=1)
+    consumption = fields.Selection(tracking=1)
+    mrp_bom_lines_tracking = fields.Char(tracking=1)
+
+class MrpBomLine(models.Model):
+    _inherit = 'mrp.bom.line'
+
+    product_id = fields.Many2one(tracking=1)
+    product_tmpl_id = fields.Many2one(tracking=1)
+    product_qty_display = fields.Float(tracking=1)
+    product_uom_id_display = fields.Many2one(tracking=1)
+
+    

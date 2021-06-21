@@ -36,6 +36,20 @@ class Override_Bom(models.Model):
     quantity = fields.Integer(string='Cantidad', default=0)
     total = fields.Integer(string='Total', compute='_calc_total')
 
+    bom_line_ids = fields.One2many('mrp.bom.line', 'bom_id', 'BoM Lines', copy=True)
+    mrp_bom_lines_tracking = fields.Char(string='Rastreo Lineas de Lista de Materiales', compute='_take_lines_bom')
+
+    @api.depends('bom_line_ids')
+    def _take_lines_bom(self):
+        """ Toma las lineas de la lista de materiales. """
+        lines_name = ''
+        for line in self.bom_line_ids:
+            if line.product_id.product_template_attribute_value_ids.name:
+                lines_name += line.product_id.product_tmpl_id.name +','+ line.product_id.product_template_attribute_value_ids.name +','+ str(line.product_qty_display) +','+ line.product_uom_id_display.name + '/'
+            else:
+                lines_name += line.product_id.product_tmpl_id.name +','+ str(line.product_qty_display) +','+ line.product_uom_id_display.name + '/'
+        self.mrp_bom_lines_tracking = lines_name
+
     @api.depends('repetitions', 'quantity')
     def _calc_total(self):
         """ Calcula la multiplicacion de repeticiones y cantidad. """
