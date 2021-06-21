@@ -58,9 +58,9 @@ class InternalPurchase(models.Model):
      user_gen = fields.Many2one('res.users', string='Generó Reporte', required=False, copy=False)
      date_gen = fields.Datetime(string='Fecha generación último reporte', copy=False)
 
-     user_sol = fields.Many2one('res.users', string='Quien Solicita', required=True)
+     user_sol = fields.Many2one('res.users', string='Quien Solicita')
      area_sol = fields.Many2one('hr.department', string='Área Solicitante')
-     date_sol = fields.Datetime(string='Fecha de Solicitud', required=True)
+     date_sol = fields.Datetime(string='Fecha de Solicitud')
 
      description = fields.Char(string='Descripción Requisición', copy=False)
 
