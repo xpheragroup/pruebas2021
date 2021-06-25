@@ -629,14 +629,14 @@ class Picking(models.Model):
             if self.origin:
                 code_sc = self.origin
                 code_oc_sc = self.env['purchase.order'].search([('codigo_solicitud_cotizacion','=',code_sc),],limit=1).name
-                code_oc_rint = self.env['purchase.order'].search([('code_requisition','=',code_sc),],limit=1).name
+                #code_oc_rint = self.env['purchase.order'].search([('code_requisition','=',code_sc),],limit=1).name
  
                 if code_oc_sc:
                     vals['origin_order'] = code_oc_sc
                 if 'OC' in code_sc:
                     vals['origin_order'] = code_sc
-                if code_oc_rint:
-                    vals['origin_order'] = code_oc_rint
+                #if code_oc_rint:
+                #    vals['origin_order'] = code_oc_rint
             vals['parent_id'] = False      
 
     @ api.model
