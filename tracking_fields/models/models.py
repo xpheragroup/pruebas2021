@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import re
 from odoo import models, fields
 
 class tracking_field_overwriter(models.Model):
@@ -168,6 +169,69 @@ class ProductOver(models.Model):
 class ProductionOver(models.Model):
     _inherit = 'mrp.production'
 
+    cost_center = fields.Many2one(tracking=1)
+
+    cycle = fields.Integer(tracking=1)
+    reference = fields.Char(tracking=1)
+
+    add_product_id = fields.Many2many(tracking=1)
+    add_bom_id = fields.Many2many(tracking=1)
+    bom_id = fields.Many2one(tracking=1)
+
+    name = fields.Char(tracking=1)
+    origin = fields.Char(tracking=1)
+
+    product_id = fields.Many2one(tracking=1)
+    product_tmpl_id = fields.Many2one(tracking=1)
+    product_qty = fields.Float(tracking=1)
+    product_uom_id = fields.Many2one(tracking=1)
+    product_uom_qty = fields.Float(tracking=1)
+    picking_type_id = fields.Many2one(tracking=1)
+    location_src_id = fields.Many2one(tracking=1)
+    location_dest_id = fields.Many2one(tracking=1)
+    date_planned_start = fields.Datetime(tracking=1)
+    date_planned_finished = fields.Datetime(tracking=1)
+    date_deadline = fields.Datetime(tracking=1)
+    date_start = fields.Datetime(tracking=1)
+    date_finished = fields.Datetime(tracking=1)
+    date_start_wo = fields.Datetime(tracking=1)
+
+    routing_id = fields.Many2one(tracking=1)
+
+    reservation_state = fields.Selection(tracking=1)
+
+    move_raw_ids = fields.One2many(tracking=1)
+    move_finished_ids = fields.One2many(tracking=1)
+    finished_move_line_ids = fields.One2many(tracking=1)
+    workorder_ids = fields.One2many(tracking=1)
+    workorder_count = fields.Integer(tracking=1)
+    workorder_done_count = fields.Integer(tracking=1)
+    move_dest_ids = fields.One2many(tracking=1)
+
+    unreserve_visible = fields.Boolean(tracking=1)
+    post_visible = fields.Boolean(tracking=1)
+    user_id = fields.Many2one(tracking=1)
+    company_id = fields.Many2one(tracking=1)
+
+    qty_produced = fields.Float(tracking=1)
+    procurement_group_id = fields.Many2one(tracking=1)
+    orderpoint_id = fields.Many2one(tracking=1)
+    propagate_cancel = fields.Boolean(tracking=1)
+    propagate_date = fields.Boolean(tracking=1)
+    propagate_date_minimum_delta = fields.Integer(tracking=1)
+    scrap_ids = fields.One2many(tracking=1)
+    scrap_count = fields.Integer(tracking=1)
+    priority = fields.Selection(tracking=1)
+    is_locked = fields.Boolean(tracking=1)
+    show_final_lots = fields.Boolean(tracking=1)
+    production_location_id = fields.Many2one(tracking=1)
+    picking_ids = fields.Many2many(tracking=1)
+    delivery_count = fields.Integer(tracking=1)
+    confirm_cancel = fields.Boolean(tracking=1)
+
+    trancking_move_raw_ids = fields.Char(tracking=1)
+    trancking_move_raw_ids_blocked = fields.Char(tracking=1)
+
     # 2Many fields
     def write(self, vals):
         write_result = super(ProductionOver, self).write(vals)
@@ -176,13 +240,14 @@ class ProductionOver(models.Model):
                 message = '<p>Se han hecho los siguientes cambios a la receta:</p><ul>'
                 mods = 0
                 for component in vals['move_raw_ids']:
-                    if component[2] != False:
-                        mods += 1
-                        if 'virtual' in str(component[1]):
-                            message += '<li>Se agrega el producto {}.</li>'.format(component[2]['name'])
-                        elif component[2].get('product_uom_qty') is not None:
-                            move = self.env['stock.move'].search([['id', '=', component[1]]])
-                            message += '<li>Se modifica la cantidad a usar del producto {}. De {} a {}.</li>'.format(move.product_tmpl_id.name, move.product_uom_qty, component[2]['product_uom_qty'])
+                    if len(component)>2:
+                        if component[2] != False:
+                            mods += 1
+                            if 'virtual' in str(component[1]):
+                                message += '<li>Se agrega el producto {}.</li>'.format(component[2]['name'])
+                            elif component[2].get('product_uom_qty') is not None:
+                                move = self.env['stock.move'].search([['id', '=', component[1]]])
+                                message += '<li>Se modifica la cantidad a usar del producto {}. De {} a {}.</li>'.format(move.product_tmpl_id.name, move.product_uom_qty, component[2]['product_uom_qty'])
                 message += '</ul>'
                 if mods > 0:
                     self.message_post(body=message)

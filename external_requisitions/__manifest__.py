@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Internal Requisitions",
+    'name': "external_requisitions",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -24,14 +24,12 @@
 
     # always loaded
     'data': [
-        'security/security.xml',
-        'security/ir.model.access.csv',
-        'views/purchase.xml',
+        # 'security/ir.model.access.csv',
         'views/views.xml',
-        'data/sequence.xml',
-        'views/inventory.xml',
         'views/templates.xml',
-        'reports/requisition_report.xml',
+        'views/account_analytic.xml',
+        'views/partner.xml',
+        'views/order.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

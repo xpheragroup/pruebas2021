@@ -84,6 +84,7 @@ class MrpProduction(models.Model):
             mrp.write({'user_apr': False})
             mrp.write({'date_rev': False})
             mrp.write({'date_apr': False})
+        self._onchange_move_raw()
         return True
     
     def to_review(self):
@@ -212,6 +213,13 @@ class MrpProductProduce(models.TransientModel):
 
     def do_produce(self):
         """ Save the current wizard and go back to the MO. """
+
+        for line in self.raw_workorder_line_ids:
+            for line_lot in line.lot_id.quant_ids:
+                if line_lot.location_id == self.move_raw_ids.location_id:
+                    if line_lot.quantity < line.qty_done:
+                        raise UserError(_('No hay existencias suficientes en el lote ' + line_lot.lot_id.name + ' en la ubicación ' + line_lot.location_id.complete_name + '.'))
+
         self.ensure_one()
         self._record_production()
         self._check_company()

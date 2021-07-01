@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
 
 from . import models
-from . import purchase
-from . import inventory
+from . import customer_invoice

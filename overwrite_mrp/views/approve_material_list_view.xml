@@ -28,6 +28,8 @@
                         <field name="total_std_cost_prom_blocked" invisible="False"/>
                         <field name="total_real_cost_prom" invisible="True"/>
                         <field name="total_real_cost_prom_blocked" invisible="False"/>
+                        <field name="trancking_move_raw_ids" invisible="True"/>
+                        <field name="trancking_move_raw_ids_blocked" invisible="True"/>
                     </group>
                 </group>
             </field>

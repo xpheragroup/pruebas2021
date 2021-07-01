@@ -53,13 +53,13 @@
                                 <field name="invoice_count" widget="statinfo" string="Vendor Bills"/>
                                 <field name='invoice_ids' invisible="1"/>
                             </button>
-                            <button type="object"
+                            <!--<button type="object"
                             name="action_view_picking"
                             class="oe_stat_button"
                             icon="fa-truck" attrs="{'invisible':[('picking_ids','=',[])]}">
                             <field name="picking_count" widget="statinfo" string="Recepción" help="Incoming Shipments"/>
                             <field name="picking_ids" invisible="1"/>
-                        </button>
+                            </button>-->
                         </div>
                         <div class="oe_title">
                             <span class="o_form_label">Orden de obsequio</span>

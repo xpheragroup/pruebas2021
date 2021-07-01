@@ -13,7 +13,7 @@
     'website': "http://xphera.co",
     'category': 'Purchase',
     'version': '0.1',
-    'depends': ['base', 'purchase', 'purchase_stock'],
+    'depends': ['base', 'purchase'], #'purchase_stock'],
     'data': [
         'views/views.xml',
     ],

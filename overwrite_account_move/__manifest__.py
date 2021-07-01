@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Internal Requisitions",
+    'name': "Overwrite account.move",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
         subtitle on modules listing or apps.openerp.com""",
 
     'description': """
-        Long description of module's purpose
+        Consolidar ordenes de entrega en facturación.
     """,
 
     'author': "My Company",
@@ -20,18 +20,14 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','sale','sale_management'],
+    'depends': ['base', 'account'],
 
     # always loaded
     'data': [
-        'security/security.xml',
-        'security/ir.model.access.csv',
-        'views/purchase.xml',
+        # 'security/ir.model.access.csv',
         'views/views.xml',
-        'data/sequence.xml',
-        'views/inventory.xml',
         'views/templates.xml',
-        'reports/requisition_report.xml',
+        'views/customer_invoice.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

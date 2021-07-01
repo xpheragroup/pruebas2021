@@ -69,6 +69,30 @@ class Override_Bom_Production(models.Model):
         check_company=True,
         help="Bill of Materials allow you to define the list of required components to make a finished product.")
 
+    trancking_move_raw_ids = fields.Char(string='Traza lineas', compute='_get_tracking_move_raw_ids')
+    trancking_move_raw_ids_blocked = fields.Char(string='Traza lineas a producir')
+
+    @api.depends('move_raw_ids','state')
+    def _get_tracking_move_raw_ids(self):
+        """ Toma las lineas de la orden de producción. """
+        lines_name = ''
+        for line in self.move_raw_ids:
+            if line.fab_product:
+                if line.product_id.product_template_attribute_value_ids.name:
+                    lines_name += line.fab_product.name +','+ line.product_id.name +','+ line.product_id.product_template_attribute_value_ids.name +','+ str(line.product_uom_qty) +','+ line.product_uom.name + '/'
+                else:
+                    lines_name += line.fab_product.name +','+ line.product_id.name +','+ str(line.product_uom_qty) +','+ line.product_uom.name + '/'
+            else:
+                if line.product_id.product_template_attribute_value_ids.name:
+                    lines_name += line.product_id.name +','+ line.product_id.product_template_attribute_value_ids.name +','+ str(line.product_uom_qty) +','+ line.product_uom.name + '/'
+                else:
+                    lines_name += line.product_id.name +','+ str(line.product_uom_qty) +','+ line.product_uom.name + '/'
+        self.trancking_move_raw_ids = lines_name
+
+    @api.onchange('trancking_move_raw_ids')
+    def get_tracking(self):
+        if self.trancking_move_raw_ids_blocked != self.trancking_move_raw_ids:
+            self.trancking_move_raw_ids_blocked = self.trancking_move_raw_ids
 
     @api.model
     def _get_default_location_src_id(self):
@@ -179,6 +203,14 @@ class Override_Bom_Production(models.Model):
                     else:
                         raise UserError(_('La lista de materiales está en estado borrador.'))
 
+    @api.onchange('add_bom_id')
+    def _onchange_move_raw_add_bom_id(self):
+        self._onchange_move_raw()
+
+    @api.onchange('add_product_id')
+    def clean_add_bom_id(self):
+        self.add_bom_id=False
+
     @api.depends('move_raw_ids.std_quantity', 'move_raw_ids.product_id.standard_price')
     def _compute_std_cost(self):
         """ Calcula el costo estándar a partir de los productos presentes en 'move_raw_ids'. """
@@ -215,12 +247,12 @@ class Override_Bom_Production(models.Model):
             self.total_std_cost_blocked = self.total_std_cost
             self.total_std_cost_prom_blocked = self.total_std_cost_prom
     
-    @api.constrains('state')
-    def get_cost_(self):
-        self.total_real_cost_blocked = self.total_real_cost
-        self.total_real_cost_prom_blocked = self.total_real_cost_prom
-        self.total_std_cost_blocked = self.total_std_cost
-        self.total_std_cost_prom_blocked = self.total_std_cost_prom
+    #@api.constrains('state')
+    #def get_cost_(self):
+    #    self.total_real_cost_blocked = self.total_real_cost
+    #    self.total_real_cost_prom_blocked = self.total_real_cost_prom
+    #    self.total_std_cost_blocked = self.total_std_cost
+    #    self.total_std_cost_prom_blocked = self.total_std_cost_prom
 
     def _get_moves_raw_values(self):
         """ @Overwrite: Obtiene los ingredietes de un producto una vez es selccionado.

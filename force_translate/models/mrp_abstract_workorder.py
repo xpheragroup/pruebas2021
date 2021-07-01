@@ -37,7 +37,7 @@ class MrpAbstractWorkorderLine(models.AbstractModel):
 
     # Overdefinition to force translate to ES_CO
     def _update_move_lines(self):
-        """ update a move line to save the workorder line data"""
+        """ update a move line to save the workorder line data"""  
         self.ensure_one()
         if self.lot_id:
             move_lines = self.move_id.move_line_ids.filtered(
@@ -47,10 +47,14 @@ class MrpAbstractWorkorderLine(models.AbstractModel):
                 lambda ml: not ml.lot_id and not ml.lot_produced_ids)
         if self.product_id.tracking != 'none' and not self.lot_id:
             if not self.lot_id.quant_ids:
-                raise UserError(_('No hay existencias.'))
-            for i in self.lot_id.quant_ids:
-                if i.quantity == 0:
+                if self.lot_id.name:
+                    raise UserError(_('No hay existencias del lote ' + self.lot_id.name + '.'))
+                else:
                     raise UserError(_('No hay existencias.'))
+            for i in self.lot_id.quant_ids:
+                if i.location_id == self.move_id.location_id:
+                    if i.quantity == 0:
+                        raise UserError(_('No hay existencias del lote ' + i.lot_id + '.'))
             raise UserError(_('Por favor, ingrese un número de lote para %s.' %
                               self.product_id.display_name))  # The first translation is done here
         if self.lot_id and self.product_id.tracking == 'serial' and self.lot_id in self.move_id.move_line_ids.filtered(lambda ml: ml.qty_done).mapped('lot_id'):

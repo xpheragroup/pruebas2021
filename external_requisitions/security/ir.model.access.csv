@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_external_requisitions_external_requisitions,external_requisitions.external_requisitions,model_external_requisitions_external_requisitions,base.group_user,1,1,1,1
