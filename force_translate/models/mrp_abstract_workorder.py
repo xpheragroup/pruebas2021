@@ -50,7 +50,7 @@ class MrpAbstractWorkorderLine(models.AbstractModel):
                 if self.lot_id.name:
                     raise UserError(_('No hay existencias del lote ' + self.lot_id.name + '.'))
                 else:
-                    raise UserError(_('No hay existencias.'))
+                    raise UserError(_('No hay un lote establecido en el producto ' + self.product_id.name + '.'))
             for i in self.lot_id.quant_ids:
                 if i.location_id == self.move_id.location_id:
                     if i.quantity == 0:

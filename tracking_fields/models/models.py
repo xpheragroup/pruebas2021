@@ -229,8 +229,7 @@ class ProductionOver(models.Model):
     delivery_count = fields.Integer(tracking=1)
     confirm_cancel = fields.Boolean(tracking=1)
 
-    trancking_move_raw_ids = fields.Char(tracking=1)
-    trancking_move_raw_ids_blocked = fields.Char(tracking=1)
+    tracking_move_raw_ids_blocked = fields.Char(tracking=1)
 
     # 2Many fields
     def write(self, vals):
