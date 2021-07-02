@@ -243,13 +243,13 @@ class Override_Bom_Production(models.Model):
             self.total_std_cost_blocked = self.total_std_cost
             self.total_std_cost_prom_blocked = self.total_std_cost_prom
     
-    @api.constrains('state')
+    '''@api.constrains('state')
     def get_cost_(self):
         #Toma el costo y bloquea
         self.total_real_cost_blocked = self.total_real_cost
         self.total_real_cost_prom_blocked = self.total_real_cost_prom
         self.total_std_cost_blocked = self.total_std_cost
-        self.total_std_cost_prom_blocked = self.total_std_cost_prom
+        self.total_std_cost_prom_blocked = self.total_std_cost_prom'''
 
     def _get_moves_raw_values(self):
         """ @Overwrite: Obtiene los ingredietes de un producto una vez es selccionado.
