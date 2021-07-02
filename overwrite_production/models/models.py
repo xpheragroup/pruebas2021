@@ -215,11 +215,12 @@ class MrpProductProduce(models.TransientModel):
         """ Save the current wizard and go back to the MO. """
 
         for line in self.raw_workorder_line_ids:
-            for line_lot in line.lot_id.quant_ids:
-                if line_lot.location_id == self.move_raw_ids.location_id:
-                    if line_lot.quantity < line.qty_done:
-                        raise UserError(_('No hay existencias suficientes en el lote ' + line_lot.lot_id.name + ' en la ubicación ' + line_lot.location_id.complete_name + '.'))
-
+            if line.lot_id:
+                for line_lot in line.lot_id.quant_ids:
+                    if line_lot.location_id == self.move_raw_ids.location_id:
+                        if line_lot.quantity < line.qty_done:
+                            raise UserError(_('No hay existencias suficientes en el lote ' + line_lot.lot_id.name + ' en la ubicación ' + line_lot.location_id.complete_name + '.'))
+                            
         self.ensure_one()
         self._record_production()
         self._check_company()
