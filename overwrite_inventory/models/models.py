@@ -1047,12 +1047,12 @@ class StockQuant(models.Model):
                                     if product.product_uom.uom_type == "bigger":
                                         ratio_qty_purchase = (1/product.product_uom.factor_inv)
                                     elif product.product_uom.uom_type == "smaller":
-                                        ratio_qty_purchase = (1/product.product_uom.factor)
+                                        ratio_qty_purchase = product.product_uom.factor
                                     else:
                                         ratio_qty_purchase = 1
 
                                     if line.product_uom_id.uom_type == "bigger":
-                                        ratio_qty = (1/line.product_uom_id.factor_inv)
+                                        ratio_qty = line.product_uom_id.factor_inv
                                     elif line.product_uom_id.uom_type == "smaller":
                                         ratio_qty = (1/line.product_uom_id.factor)
                                     else:

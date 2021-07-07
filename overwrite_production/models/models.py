@@ -207,14 +207,14 @@ class MrpBomLineOver(models.Model):
         for mbl in self:
             if mbl.product_qty_display and mbl.product_uom_id_display:
                 if mbl.product_uom_id_display.uom_type == "bigger":
-                    ratio_qty_display = (1/mbl.product_uom_id_display.factor_inv)
+                    ratio_qty_display = mbl.product_uom_id_display.factor_inv
                 elif mbl.product_uom_id_display.uom_type == "smaller":
                     ratio_qty_display = (1/mbl.product_uom_id_display.factor)
                 else:
                     ratio_qty_display = 1
 
                 if mbl.product_uom_id.uom_type == "bigger":
-                    ratio_qty = mbl.product_uom_id.factor_inv
+                    ratio_qty = (1/mbl.product_uom_id.factor_inv)
                 elif mbl.product_uom_id.uom_type == "smaller":
                     ratio_qty = mbl.product_uom_id.factor
                 else:

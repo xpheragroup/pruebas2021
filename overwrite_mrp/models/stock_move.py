@@ -79,15 +79,15 @@ class Override_StockMove(models.Model):
             if record.product_uom.name != record.product_id.uom_name:
                 if record.product_uom.uom_type != "reference":
                     if record.product_uom.uom_type == "bigger":
-                        ratio_qty = record.product_uom.factor_inv 
+                        ratio_qty = record.product_uom.factor_inv
                     elif record.product_uom.uom_type == "smaller":
-                        ratio_qty = record.product_uom.factor
+                        ratio_qty = (1/record.product_uom.factor)
                     else:
                         ratio_qty = 1
                 
                 if record.product_id.uom_id.uom_type != "reference":
                     if record.product_id.uom_id.uom_type == "bigger":
-                        ratio_price = record.product_id.uom_id.factor_inv 
+                        ratio_price = (1/record.product_id.uom_id.factor_inv)
                     elif record.product_id.uom_id.uom_type == "smaller":
                         ratio_price = record.product_id.uom_id.factor
                     else:
@@ -96,10 +96,10 @@ class Override_StockMove(models.Model):
                 ratio_qty = 1
                 ratio_price = 1
 
-            record.real_cost = record.product_uom_qty * ratio_qty * record.product_id.standard_price * ratio_price
-            record.std_cost = record.std_quantity * ratio_qty * record.product_id.standard_price * ratio_price
-            record.real_cost_prom = record.product_uom_qty * ratio_qty * record.cost_unit_lot_fab * ratio_price
-            record.std_cost_prom = record.std_quantity * ratio_qty * record.cost_unit_lot_fab * ratio_price
+            record.real_cost = record.product_uom_qty * (ratio_qty*ratio_price) * record.product_id.standard_price
+            record.std_cost = record.std_quantity * (ratio_qty*ratio_price) * record.product_id.standard_price
+            record.real_cost_prom = record.product_uom_qty * (ratio_qty*ratio_price) * record.cost_unit_lot_fab
+            record.std_cost_prom = record.std_quantity * (ratio_qty*ratio_price) * record.cost_unit_lot_fab
             
     @api.depends('product_id.qty_available', 'location_id')
     def _compute_existence_qty(self):
