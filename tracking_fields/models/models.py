@@ -231,6 +231,12 @@ class ProductionOver(models.Model):
 
     tracking_move_raw_ids_blocked = fields.Char(tracking=1)
 
+    total_real_cost_blocked = fields.Float(tracking=1)
+    total_std_cost_blocked = fields.Float(tracking=1)
+    
+    total_real_cost_prom_blocked = fields.Float(tracking=1)
+    total_std_cost_prom_blocked = fields.Float(tracking=1)
+
     # 2Many fields
     def write(self, vals):
         write_result = super(ProductionOver, self).write(vals)
