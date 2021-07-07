@@ -87,9 +87,9 @@ class Override_StockMove(models.Model):
                 
                 if record.product_id.uom_id.uom_type != "reference":
                     if record.product_id.uom_id.uom_type == "bigger":
-                        ratio_price = record.product_id.factor_inv 
+                        ratio_price = record.product_id.uom_id.factor_inv 
                     elif record.product_id.uom_id.uom_type == "smaller":
-                        ratio_price = record.product_id.factor
+                        ratio_price = record.product_id.uom_id.factor
                     else:
                         ratio_price = 1
             else:
