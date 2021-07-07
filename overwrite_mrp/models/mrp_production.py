@@ -214,13 +214,20 @@ class Override_Bom_Production(models.Model):
             #std_cost = sum(product.std_quantity * product.product_id.standard_price for product in record.move_raw_ids)
             std_cost = 0
             for product in record.move_raw_ids:
+                ratio_qty = 1
+                ratio_price = 1
                 if product.product_uom.name != product.product_id.uom_name:
                     if product.product_uom.uom_type == "bigger":
-                        std_cost += product.std_quantity * product.product_uom.factor_inv * product.product_id.standard_price
+                        ratio_qty = product.product_uom.factor_inv
                     elif product.product_uom.uom_type == "smaller":
-                        std_cost += product.std_quantity * product.product_uom.factor * product.product_id.standard_price
-                else:
-                    std_cost += product.std_quantity * product.product_id.standard_price
+                        ratio_qty = (1/product.product_uom.factor)
+                    
+                    if product.product_id.uom_id.uom_type == "bigger":
+                        ratio_price = (1/product.product_id.uom_id.factor_inv)
+                    elif product.product_id.uom_id.uom_type == "smaller":
+                        ratio_price = product.product_id.uom_id.factor
+
+                std_cost += product.std_quantity * (ratio_qty*ratio_price) * product.product_id.standard_price
             record.total_std_cost = std_cost
 
     @api.depends('move_raw_ids.std_quantity', 'move_raw_ids.product_id.standard_price')
@@ -230,13 +237,20 @@ class Override_Bom_Production(models.Model):
             #std_cost = sum(product.std_quantity * product.cost_unit_lot_fab for product in record.move_raw_ids)
             std_cost = 0
             for product in record.move_raw_ids:
+                ratio_qty = 1
+                ratio_price = 1
                 if product.product_uom.name != product.product_id.uom_name:
                     if product.product_uom.uom_type == "bigger":
-                        std_cost += product.std_quantity * product.product_uom.factor_inv * product.cost_unit_lot_fab
+                        ratio_qty = product.product_uom.factor_inv
                     elif product.product_uom.uom_type == "smaller":
-                        std_cost += product.std_quantity * product.product_uom.factor * product.cost_unit_lot_fab
-                else:
-                    std_cost += product.std_quantity * product.cost_unit_lot_fab
+                        ratio_qty = (1/product.product_uom.factor)
+                    
+                    if product.product_id.uom_id.uom_type == "bigger":
+                        ratio_price = (1/product.product_id.uom_id.factor_inv)
+                    elif product.product_id.uom_id.uom_type == "smaller":
+                        ratio_price = product.product_id.uom_id.factor
+
+                std_cost += product.std_quantity * (ratio_qty*ratio_price) * product.cost_unit_lot_fab
             record.total_std_cost_prom = std_cost 
       
     @api.depends('move_raw_ids.product_id', 'move_raw_ids.product_id.standard_price')
@@ -246,13 +260,20 @@ class Override_Bom_Production(models.Model):
             #real_cost = sum(product.product_uom_qty * product.product_id.standard_price for product in record.move_raw_ids)
             real_cost = 0
             for product in record.move_raw_ids:
+                ratio_qty = 1
+                ratio_price = 1
                 if product.product_uom.name != product.product_id.uom_name:
                     if product.product_uom.uom_type == "bigger":
-                        real_cost += product.product_uom_qty * product.product_uom.factor_inv * product.product_id.standard_price
+                        ratio_qty = product.product_uom.factor_inv
                     elif product.product_uom.uom_type == "smaller":
-                        real_cost += product.product_uom_qty * product.product_uom.factor * product.product_id.standard_price
-                else:
-                    real_cost += product.product_uom_qty * product.product_id.standard_price
+                        ratio_qty = (1/product.product_uom.factor)
+                    
+                    if product.product_id.uom_id.uom_type == "bigger":
+                        ratio_price = (1/product.product_id.uom_id.factor_inv)
+                    elif product.product_id.uom_id.uom_type == "smaller":
+                        ratio_price = product.product_id.uom_id.factor
+
+                real_cost += product.product_uom_qty * (ratio_qty*ratio_price) * product.product_id.standard_price
             record.total_real_cost = real_cost
     
     @api.depends('move_raw_ids.product_id', 'move_raw_ids.product_id.standard_price')
@@ -262,50 +283,20 @@ class Override_Bom_Production(models.Model):
             #real_cost = sum(product.product_uom_qty * product.cost_unit_lot_fab for product in record.move_raw_ids)
             real_cost = 0
             for product in record.move_raw_ids:
-                print("")
-                print("PRODUTO")
-                print("name")
-                print(product.product_id.name)
-                print("")
-                print("product_uom")
-                print(product.product_uom.name)
-                print("")
-                print("product_id.standard_price")
-                print(product.product_id.standard_price)
-                print("")
-                print("product_id.uom_name")
-                print(product.product_id.uom_name)
-                print("")    
-                print("product_uom_qty")
-                print(product.product_uom_qty)
-                print("")
-                print("cost_unit_lot_fab")
-                print(product.cost_unit_lot_fab)
-                print("")
-                print("product_uom.factor_inv")
-                print(product.product_uom.factor_inv)
-                print("")
-                print("product_uom.factor")
-                print(product.product_uom.factor)
-                print("")
-                print("product_uom.uom_type")
-                print(product.product_uom.uom_type)
-                print("")
+                ratio_qty = 1
+                ratio_price = 1
                 if product.product_uom.name != product.product_id.uom_name:
-                    print("UNIDADES DIFERENTES")
-                    print(product.product_uom.uom_type)
                     if product.product_uom.uom_type == "bigger":
-                        print("")
-                        print("Es más GRANDE.")
-                        print("")
-                        real_cost += product.product_uom_qty * product.product_uom.factor_inv * product.cost_unit_lot_fab
+                        ratio_qty = product.product_uom.factor_inv
                     elif product.product_uom.uom_type == "smaller":
-                        print("")
-                        print("Es más PEQUEÑO.")
-                        print("")
-                        real_cost += product.product_uom_qty * product.product_uom.factor * product.cost_unit_lot_fab
-                else:
-                    real_cost += product.product_uom_qty * product.cost_unit_lot_fab
+                        ratio_qty = (1/product.product_uom.factor)
+                    
+                    if product.product_id.uom_id.uom_type == "bigger":
+                        ratio_price = (1/product.product_id.uom_id.factor_inv)
+                    elif product.product_id.uom_id.uom_type == "smaller":
+                        ratio_price = product.product_id.uom_id.factor
+
+                real_cost += product.product_uom_qty * (ratio_qty*ratio_price) * product.cost_unit_lot_fab
             record.total_real_cost_prom = real_cost
 
     @api.onchange('total_real_cost','total_real_cost_prom','total_std_cost','total_std_cost_prom')
