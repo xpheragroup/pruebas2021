@@ -37,7 +37,7 @@ class Override_StockMove(models.Model):
             product = line.product_id
             costo_prom = 0
             if lugar:
-                for quant in self.env['stock.quant'].search([('product_id.id','=',product.id),('location_id','=',lugar.complete_name)],limit=1):
+                for quant in self.env['stock.quant'].search([('product_id.id','=',product.id),('location_id','=',lugar.complete_name)]):
                     costo_prom = quant.cost_unit_average
                 if costo_prom:
                     line.cost_unit_lot_fab = costo_prom
@@ -74,22 +74,32 @@ class Override_StockMove(models.Model):
             record.missing = record.product_uom_qty - record.reserved_availability
             record.deviation = record.product_uom_qty - record.std_quantity
             record.deviation_per = record.deviation / record.std_quantity if record.std_quantity > 0 else 1
+            ratio_qty = 1
+            ratio_price = 1
             if record.product_uom.name != record.product_id.uom_name:
-                if record.product_uom.uom_type == "bigger":
-                    record.real_cost = record.product_uom_qty * record.product_uom.factor_inv * record.product_id.standard_price
-                    record.std_cost = record.std_quantity * record.product_uom.factor_inv * record.product_id.standard_price
-                    record.real_cost_prom = record.product_uom_qty * record.product_uom.factor_inv * record.cost_unit_lot_fab
-                    record.std_cost_prom = record.std_quantity * record.product_uom.factor_inv * record.cost_unit_lot_fab
-                elif record.product_uom.uom_type == "smaller":
-                    record.real_cost = record.product_uom_qty * record.product_uom.factor * record.product_id.standard_price
-                    record.std_cost = record.std_quantity * record.product_uom.factor * record.product_id.standard_price
-                    record.real_cost_prom = record.product_uom_qty * record.product_uom.factor * record.cost_unit_lot_fab
-                    record.std_cost_prom = record.std_quantity * record.product_uom.factor * record.cost_unit_lot_fab
+                if record.product_uom.uom_type != "reference":
+                    if record.product_uom.uom_type == "bigger":
+                        ratio_qty = record.product_uom.factor_inv 
+                    elif record.product_uom.uom_type == "smaller":
+                        ratio_qty = record.product_uom.factor
+                    else:
+                        ratio_qty = 1
+                
+                if record.product_id.uom_id.uom_type != "reference":
+                    if record.product_id.uom_id.uom_type == "bigger":
+                        ratio_price = record.product_id.factor_inv 
+                    elif record.product_id.uom_id.uom_type == "smaller":
+                        ratio_price = record.product_id.factor
+                    else:
+                        ratio_price = 1
             else:
-                record.real_cost = record.product_uom_qty * record.product_id.standard_price
-                record.std_cost = record.std_quantity * record.product_id.standard_price
-                record.real_cost_prom = record.product_uom_qty * record.cost_unit_lot_fab
-                record.std_cost_prom = record.std_quantity * record.cost_unit_lot_fab
+                ratio_qty = 1
+                ratio_price = 1
+
+            record.real_cost = record.product_uom_qty * ratio_qty * record.product_id.standard_price * ratio_price
+            record.std_cost = record.std_quantity * ratio_qty * record.product_id.standard_price * ratio_price
+            record.real_cost_prom = record.product_uom_qty * ratio_qty * record.cost_unit_lot_fab * ratio_price
+            record.std_cost_prom = record.std_quantity * ratio_qty * record.cost_unit_lot_fab * ratio_price
             
     @api.depends('product_id.qty_available', 'location_id')
     def _compute_existence_qty(self):

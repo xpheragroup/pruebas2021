@@ -1042,8 +1042,26 @@ class StockQuant(models.Model):
                     for purchase_order_line in purchase_order.purchase_order_ids:
                         for product in purchase_order_line.order_line:
                             if product.product_id == line.product_id:
-                                cost_lots += product.price_unit*product.product_qty
-                                qty_lots += product.product_qty
+                                if product.product_uom.name != line.product_uom_id.name:
+                                    if product.product_uom.uom_type == "bigger":
+                                        ratio_qty_purchase = product.product_uom.factor
+                                    elif product.product_uom.uom_type == "smaller":
+                                        ratio_qty_purchase = product.product_uom.factor_inv
+                                    else:
+                                        ratio_qty_purchase = 1
+
+                                    if line.product_uom_id.uom_type == "bigger":
+                                        ratio_qty = line.product_uom_id.factor
+                                    elif line.product_uom_id.uom_type == "smaller":
+                                        ratio_qty = line.product_uom_id.factor_inv
+                                    else:
+                                        ratio_qty = 1
+                                else:
+                                    ratio_qty_purchase = 1
+                                    ratio_qty = 1
+                                    
+                                cost_lots += product.price_unit * (ratio_qty_purchase*ratio_qty) * product.product_qty * (ratio_qty_purchase*ratio_qty)
+                                qty_lots += product.product_qty * (ratio_qty_purchase*ratio_qty)
             if qty_lots > 0:
                 line.cost_unit = cost_lots / qty_lots
             else:

@@ -288,6 +288,9 @@ class Override_Bom_Production(models.Model):
                 print("product_uom.factor")
                 print(product.product_uom.factor)
                 print("")
+                print("product_uom.uom_type")
+                print(product.product_uom.uom_type)
+                print("")
                 if product.product_uom.name != product.product_id.uom_name:
                     print("UNIDADES DIFERENTES")
                     print(product.product_uom.uom_type)

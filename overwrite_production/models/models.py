@@ -202,11 +202,25 @@ class MrpBomLineOver(models.Model):
             if mbl.product_id:
                 mbl.product_uom_id_display = mbl.product_id.uom_id.id
 
-    @api.onchange('product_qty_display', 'product_uom_id_display')
+    @api.onchange('product_qty_display', 'product_uom_id_display', 'product_uom_id')
     def onchange_product_qty_display(self):
         for mbl in self:
             if mbl.product_qty_display and mbl.product_uom_id_display:
-                mbl.product_qty = mbl.product_qty_display * mbl.product_uom_id_display.factor_inv * mbl.product_id.uom_id.factor
+                if mbl.product_uom_id_display.uom_type == "bigger":
+                    ratio_qty_display = mbl.product_uom_id_display.factor
+                elif mbl.product_uom_id_display.uom_type == "smaller":
+                    ratio_qty_display = mbl.product_uom_id_display.factor_inv
+                else:
+                    ratio_qty_display = 1
+
+                if mbl.product_uom_id.uom_type == "bigger":
+                    ratio_qty = mbl.product_uom_id.factor_inv
+                elif mbl.product_uom_id.uom_type == "smaller":
+                    ratio_qty = mbl.product_uom_id.factor
+                else:
+                    ratio_qty = 1
+                
+                mbl.product_qty = mbl.product_qty_display * ratio_qty_display * ratio_qty
 
 class MrpProductProduce(models.TransientModel):
     _inherit = "mrp.product.produce"
