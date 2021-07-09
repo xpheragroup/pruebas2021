@@ -7,6 +7,7 @@ import logging
 import os
 import re
 
+from datetime import datetime
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import ValidationError, UserError
 from odoo.modules.module import get_resource_path
@@ -45,41 +46,28 @@ class Company(models.Model):
         _logger.critical("LdM Copiada.")
 
         if self.copy_ldm:
-            # warehouse = self.warehouse_id #and self.warehouse_id.company_id.id == self.id and self.warehouse_id or False
-            # picking_type_id = self.env['stock.picking.type'].search([
-            #                         ('warehouse_id', '=', warehouse.id), 
-            #                         ('company_id', '=', self.id)], limit=1)
             BomLine = self.env['mrp.bom.line']
 
             for ldm in self.copy_ldm:
                 # Create BOM
                 bom_created = self.env['mrp.bom'].create({
                     'company_id': self.id,
-                    #'picking_type_id': picking_type_id.id,
                     'product_tmpl_id': ldm.product_tmpl_id.id,
                     'product_id': ldm.product_id.id,
                     'product_qty': 1.0,
                     'type': 'normal',
-                    #'bom_line_ids': [(6, 0, [p.id for p in ldm.bom_line_ids])],
-                    #'bom_line_ids': [(4, p.id) for p in ldm.bom_line_ids],
                 })
+                if ldm.state == 'Aprobado':
+                    bom_created.write({
+                        'state': 'Aprobado',
+                        'approval_user': self.env.user,
+                        'approval_date': fields.Datetime.now()
+                    })
 
                 for linea_bom in ldm.bom_line_ids:
                     linea_bom_copy = linea_bom.copy()
                     linea_bom_copy.company_id = self.id
                     linea_bom_copy.bom_id = bom_created.id
-
-
-                # for linea_bom in ldm.bom_line_ids:
-                #     BomLine.create({
-                #         'company_id': self.id,
-                #         'bom_id': bom_created.id,
-                #         'product_id': linea_bom.product_tmpl_id.product_variant_id.id,
-                #         'product_qty_display': linea_bom.product_qty_display,
-                #         'product_uom_id_display': linea_bom.product_uom_id_display.id,
-                #         'product_uom_id': linea_bom.product_uom_id.id,
-                #         #'product_uom_id': linea_bom.product_id.uom_id.id,
-                #     })
                 
         else:
             raise UserError(_("No se encuentra ninguna lista de materiales asociada a la companía seleccionada."))
@@ -95,5 +83,4 @@ class Company(models.Model):
 
         if self.empresa_copy_ldm:
             self.copy_ldm = self.env['mrp.bom'].search([('company_id', '=', self.empresa_copy_ldm.id)])
-            _logger.critical("self.copy_ldm")
-            _logger.critical(self.copy_ldm)
+
