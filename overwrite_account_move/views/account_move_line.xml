@@ -1,0 +1,65 @@
+<odoo>
+    <record id="account_move_line_groups_inherit" model="ir.ui.view">
+        <field name="name">account.move.line.groups.inherit</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree_grouped_general"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date']" position="after">
+                <field name="account_group_1" invisible="False" optional="hide"/>
+                <field name="account_group_2" invisible="False" optional="hide"/>
+                <field name="account_group_3" invisible="False" optional="hide"/>
+                <field name="account_group_4" invisible="False" optional="hide"/>
+                <field name="account_group_5" invisible="False" optional="hide"/>
+                <field name="account_group_6" invisible="False" optional="hide"/>
+                <field name="account_group_7" invisible="False" optional="hide"/>
+                <field name="account_group_8" invisible="False" optional="hide"/>
+                <field name="account_group_lv_1" invisible="False" optional="hide"/>
+                <field name="account_group_lv_2" invisible="False" optional="hide"/>
+                <field name="account_group_lv_3" invisible="False" optional="hide"/>
+                <field name="account_group_lv_4" invisible="False" optional="hide"/>
+                <field name="account_group_lv_5" invisible="False" optional="hide"/>
+                <field name="account_group_lv_6" invisible="False" optional="hide"/>
+                <field name="account_group_lv_7" invisible="False" optional="hide"/>
+                <field name="account_group_lv_8" invisible="False" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_move_line_filter_groups" model="ir.ui.view">
+        <field name="name">account.move.line.filter.groups</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+        <field name="arch" type="xml">
+            <group>
+                <filter string="Grupo 1" name="account_group_1" domain="" context="{'group_by':'account_group_1'}"/>
+                <filter string="Grupo 2" name="account_group_2" domain="" context="{'group_by':'account_group_2'}"/>
+                <filter string="Grupo 3" name="account_group_3" domain="" context="{'group_by':'account_group_3'}"/>
+                <filter string="Grupo 4" name="account_group_4" domain="" context="{'group_by':'account_group_4'}"/>
+                <filter string="Grupo 5" name="account_group_5" domain="" context="{'group_by':'account_group_5'}"/>
+                <filter string="Grupo 6" name="account_group_6" domain="" context="{'group_by':'account_group_6'}"/>
+                <filter string="Grupo 7" name="account_group_7" domain="" context="{'group_by':'account_group_7'}"/>
+                <filter string="Grupo 8" name="account_group_8" domain="" context="{'group_by':'account_group_8'}"/>
+                <filter string="Grupo 1" name="account_group_lv_1" domain="" context="{'group_by':'account_group_lv_1'}"/>
+                <filter string="Grupo 2" name="account_group_lv_2" domain="" context="{'group_by':'account_group_lv_2'}"/>
+                <filter string="Grupo 3" name="account_group_lv_3" domain="" context="{'group_by':'account_group_lv_3'}"/>
+                <filter string="Grupo 4" name="account_group_lv_4" domain="" context="{'group_by':'account_group_lv_4'}"/>
+                <filter string="Grupo 5" name="account_group_lv_5" domain="" context="{'group_by':'account_group_lv_5'}"/>
+                <filter string="Grupo 6" name="account_group_lv_6" domain="" context="{'group_by':'account_group_lv_6'}"/>
+                <filter string="Grupo 7" name="account_group_lv_7" domain="" context="{'group_by':'account_group_lv_7'}"/>
+                <filter string="Grupo 8" name="account_group_lv_8" domain="" context="{'group_by':'account_group_lv_8'}"/>
+            </group>
+            <!--<group>
+                <filter string="Grupo 1" name="account_group_lv_1" domain="" context="{'group_by':'account_group_lv_1'}"/>
+                <filter string="Grupo 2" name="account_group_lv_2" domain="" context="{'group_by':'account_group_lv_2'}"/>
+                <filter string="Grupo 3" name="account_group_lv_3" domain="" context="{'group_by':'account_group_lv_3'}"/>
+                <filter string="Grupo 4" name="account_group_lv_4" domain="" context="{'group_by':'account_group_lv_4'}"/>
+                <filter string="Grupo 5" name="account_group_lv_5" domain="" context="{'group_by':'account_group_lv_5'}"/>
+                <filter string="Grupo 6" name="account_group_lv_6" domain="" context="{'group_by':'account_group_lv_6'}"/>
+                <filter string="Grupo 7" name="account_group_lv_7" domain="" context="{'group_by':'account_group_lv_7'}"/>
+                <filter string="Grupo 8" name="account_group_lv_8" domain="" context="{'group_by':'account_group_lv_8'}"/>
+            </group>-->
+        </field>
+    </record>
+
+    
+</odoo>
